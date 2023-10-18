@@ -24,14 +24,9 @@ model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
 vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
 
 # add a text area
-title = st.text_area('Title of a SMAX Ticket:', 'Type here ...')
+title = st.text_area('Title of a SMAX Ticket: (type in the box below...)', '')
 
-# clean the "Type here ..." text if it is still there and when the user enters the title box
-if st.session_state.title == 'Type here ...':
-    st.session_state.title = ''
-# if title == 'Type here ...':
-#     title = ''
-    
+
 # add a button
 if st.button('Predict'):
     # predict
