@@ -1,13 +1,26 @@
 import re
-import nltk
 import pandas as pd
 
-if not nltk.data.find('corpora/words'):
-    nltk.download('words')
-if not nltk.data.find('corpora/stopwords'):
-    nltk.download('stopwords')
-if not nltk.data.find('tokenizers/punkt'):
+import nltk
+
+# Check if 'punkt' is downloaded
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
     nltk.download('punkt')
+
+# Check if 'words' is downloaded
+try:
+    nltk.data.find('corpora/words')
+except LookupError:
+    nltk.download('words')
+
+# Check if 'stopwords' is downloaded
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
+
 
 english_words = set(nltk.corpus.words.words())
 
