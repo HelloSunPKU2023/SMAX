@@ -36,8 +36,13 @@ if st.button('Predict'):
     else:
         predictions = df.iloc[0, 1:11].tolist()
         title = df.iloc[0, 0]
-        # display the tile in blue
-        st.markdown(f"<font color='blue'>{title}</font>", unsafe_allow_html=True)
+        # display the tile in blue and bold font and larger size
+        st.markdown(f"<font color='green'>{title}</font>", unsafe_allow_html=True)
+        # # display the predictions in green, one line per prediction
+        for i, prediction in enumerate(predictions):
+            st.markdown(f"<font color='green'>{i+1}. {prediction}</font>", unsafe_allow_html=True)
+            # st.write(f"{i+1}. {prediction}")
+
         # st.write(f"Title Cleaned: {title}")
-        st.write(f"Product Name: {predictions}")
+        # st.write(f"Product Name should be: {predictions}")   
         
