@@ -1,7 +1,7 @@
 import re
 import nltk
 import pandas as pd
-# nltk.download('words')
+nltk.download('words')
 english_words = set(nltk.corpus.words.words())
 
 # Import the stopwords corpus
