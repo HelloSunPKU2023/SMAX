@@ -24,7 +24,7 @@ model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
 vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
 
 # add a text area
-title = st.text_area('Title of a SMAX Ticket: (type in the box below...)', '')
+title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
 
 
 # add a button
