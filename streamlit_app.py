@@ -11,7 +11,8 @@ from src.helper_pred import predict_top5
 """
 # Predict Product by Ticket Title
 
-Put a `Title of a SMAX Ticket` then click the `Predict` button to get the top 5 most possible product names.
+Put a `Title of a SMAX Ticket` then click the `Predict` button.
+There is a 97% chance that the correct product name is in the top 5 predictions.
 
 """
 
