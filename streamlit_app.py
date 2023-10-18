@@ -43,7 +43,7 @@ if st.button('Predict'):
         
         # # display the predictions in green, one line per prediction
         for i in range(5):
-            st.markdown(f"<font color='green'>{i+1}. {predictions[i*2]}</font>: <font color='red'>{predictions[i*2+1]*100:.2f}%</font>", unsafe_allow_html=True)
+            st.markdown(f"<font color='green'>{i+1}. {predictions[i*2]}</font>: <font color='red'>{predictions[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
             # st.write(f"{i+1}. {prediction}")
 
         # st.write(f"Title Cleaned: {title}")
