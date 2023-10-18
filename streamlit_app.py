@@ -9,9 +9,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from src.helper_pred import predict_top5
 """
-# Welcome to Product Name Predictor!
+# Predict Product by Ticket Title
 
-Put a `Title of a SMAX Ticket` then click the `Predict` button to get the top 5 predicted product names.
+Put a `Title of a SMAX Ticket` then click the `Predict` button to get the top 5 most possible product names.
 
 """
 
