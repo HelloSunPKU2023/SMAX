@@ -19,6 +19,7 @@ ipykernel
 nltk
 fasttext
 langdetect
+mtranslate
 
 openpyxl
 

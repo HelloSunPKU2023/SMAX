@@ -1,6 +1,7 @@
 import joblib
 import pandas as pd
 import numpy as np
+
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 
@@ -9,8 +10,8 @@ from src.helper_pred import predict_top5
 from fastapi import FastAPI
 app = FastAPI()
 
-MODEL_SELECTED =  'logistic_regression'
-# MODEL_SELECTED =  'sgc_classifier'
+# MODEL_SELECTED =  'logistic_regression'
+MODEL_SELECTED =  'sgc_classifier'
 
 def load_model():
     #print the current path
