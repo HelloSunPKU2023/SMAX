@@ -27,17 +27,15 @@ title = st.text_area('Title of a SMAX Ticket:', 'Type here ...')
 
 # add a button
 if st.button('Predict'):
-    pass
-
-#     # predict
-#     df = predict_top5(model = model, vectorizer = vectorizer, X_test = [title])
+    # predict
+    df = predict_top5(model = model, vectorizer = vectorizer, X_test = [title])
     
-#     # display the prediction
-#     if df is None:
-#         st.write("Cannot predict")
-#     else:
-#         predictions = df.iloc[0, 1:11].tolist()
-#         title = df.iloc[0, 0]
-#         st.write(f"Title Cleaned: {title}")
-#         st.write(f"Product Name: {predictions}")
+    # display the prediction
+    if df is None:
+        st.write("Cannot predict")
+    else:
+        predictions = df.iloc[0, 1:11].tolist()
+        title = df.iloc[0, 0]
+        st.write(f"Title Cleaned: {title}")
+        st.write(f"Product Name: {predictions}")
         
