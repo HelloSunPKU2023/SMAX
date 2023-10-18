@@ -7,7 +7,7 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import CountVectorizer
 
-# from src.helper_pred import predict_top5
+from src.helper_pred import predict_top5
 """
 # Welcome to Product Name Predictor!
 
