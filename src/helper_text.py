@@ -21,6 +21,10 @@ try:
 except LookupError:
     nltk.download('stopwords')
 
+try:
+    nltk.data.find('corpora/wordnet')
+except LookupError:
+    nltk.download('wordnet')
 
 english_words = set(nltk.corpus.words.words())
 
