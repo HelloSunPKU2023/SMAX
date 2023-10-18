@@ -19,8 +19,8 @@ Put a `Title of a SMAX Ticket` then click the `Predict` button to get the top 5 
 # MODEL_SELECTED =  'logistic_regression'
 MODEL_SELECTED =  'sgc_classifier'
 
-# model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
-# vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
+model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
+vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
 
 # add a text area
 title = st.text_area('Title of a SMAX Ticket:', 'Type here ...')
