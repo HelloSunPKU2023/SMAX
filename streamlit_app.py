@@ -29,7 +29,7 @@ title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
 # add a button
 if st.button('Predict'):
     # check if the user has entered a title
-    if title == '':
+    if title.strip() == '':
         st.write("Please enter a title")
         st.stop()
     # predict
