@@ -37,5 +37,5 @@ if st.button('Predict'):
         predictions = df.iloc[0, 1:11].tolist()
         title = df.iloc[0, 0]
         st.write(f"Title Cleaned: {title}")
-        st.write(f"Product Name: {predictions}")
+        st.write(f"Product Name: {predictions}\n")
         
