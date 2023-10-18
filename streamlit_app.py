@@ -39,7 +39,7 @@ if st.button('Predict'):
         # display the tile in blue and bold font and larger size
         st.markdown(f"Title cleaned up: <font color='green'>{title}</font>", unsafe_allow_html=True)
         # # display the predictions in green, one line per prediction
-        for i in range(len(predictions)/2):
+        for i in range(5):
             st.markdown(f"<font color='green'>{i+1}. {predictions[i*2]}:{predictions[i*2+1]}</font>", unsafe_allow_html=True)
             # st.write(f"{i+1}. {prediction}")
 
