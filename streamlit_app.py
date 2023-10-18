@@ -36,6 +36,8 @@ if st.button('Predict'):
     else:
         predictions = df.iloc[0, 1:11].tolist()
         title = df.iloc[0, 0]
-        st.write(f"Title Cleaned: {title}")
-        st.write(f"Product Name: {predictions}\n")
+        # display the tile in blue
+        st.markdown(f"<font color='blue'>{title}</font>", unsafe_allow_html=True)
+        # st.write(f"Title Cleaned: {title}")
+        st.write(f"Product Name: {predictions}")
         
