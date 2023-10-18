@@ -1,26 +1,27 @@
 # list all the required packages
 setuptools
 wheel
-
 ipywidgets
 
+# for run-time
 scipy
 pybind11
-
 pandas
 numpy
 scikit-learn
+nltk
+mtranslate
+
 optuna
 
 matplotlib
 seaborn
 
 ipykernel
-nltk
+
+# for data processing
 fasttext
 langdetect
-mtranslate
-
 openpyxl
 
 # uvicorn

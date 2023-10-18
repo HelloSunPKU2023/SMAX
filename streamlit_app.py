@@ -14,20 +14,21 @@ from sklearn.feature_extraction.text import CountVectorizer
 Put a `Title of a SMAX Ticket` then click the `Predict` button to get the top 5 predicted product names.
 
 """
+
+# load the model
 # MODEL_SELECTED =  'logistic_regression'
 MODEL_SELECTED =  'sgc_classifier'
 
-model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
-vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
+# model = joblib.load(f'models/model_{MODEL_SELECTED}.pkl', 'rb')
+# vectorizer = joblib.load(f'models/vectorizer_{MODEL_SELECTED}.pkl', 'rb')
 
 # add a text area
 title = st.text_area('Title of a SMAX Ticket:', 'Type here ...')
 
-# # add a button
-# if st.button('Predict'):
-#     # load the model
+# add a button
+if st.button('Predict'):
+    pass
 
-    
 #     # predict
 #     df = predict_top5(model = model, vectorizer = vectorizer, X_test = [title])
     
