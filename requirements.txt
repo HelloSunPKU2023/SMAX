@@ -1,0 +1,32 @@
+# list all the required packages
+setuptools
+wheel
+
+ipywidgets
+
+scipy
+pybind11
+
+pandas
+numpy
+scikit-learn
+optuna
+
+matplotlib
+seaborn
+
+ipykernel
+nltk
+fasttext
+langdetect
+
+openpyxl
+
+# uvicorn
+# fastapi
+
+# for jupyter notebook nbexternsions
+
+# jupyter_contrib_nbextensions
+# traitlets==5.9.0
+# notebook==6.4.12
