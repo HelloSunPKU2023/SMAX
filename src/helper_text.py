@@ -1,8 +1,13 @@
 import re
 import nltk
 import pandas as pd
-nltk.download('words')
-nltk.download('stopwords')
+
+if not nltk.data.find('corpora/words'):
+    nltk.download('words')
+if not nltk.data.find('corpora/stopwords'):
+    nltk.download('stopwords')
+if not nltk.data.find('tokenizers/punkt'):
+    nltk.download('punkt')
 
 english_words = set(nltk.corpus.words.words())
 
