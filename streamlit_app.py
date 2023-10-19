@@ -12,13 +12,14 @@ from src.helper_pred import predict_top5
 # Predict Product by Ticket Title
 
 Put a `Title of a SMAX Ticket` then click the `Predict` button. \n
-There is a `97%` chance that the correct product name is in the top 5 predictions.
+There is a `95%` chance that the correct product name is in the top 5 predictions.
 
 """
 
 # load the model
 MODEL_2 =  'sgc_classifier'
 MODEL_1 =  'logistic_regression'
+MODEL_3 = 'multinomialNB'
 
 model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
 vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
@@ -68,3 +69,20 @@ if st.button('Predict'):
         for i in range(5):
             if predictions2[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions2[i*2]}</font>: <font color='red'>{predictions2[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
+                
+    # Model 3
+    st.markdown(f"Predicted by: {MODEL_3} model")
+    # predict
+    df3 = predict_top5(model = model3, vectorizer = vectorizer3, X_test = [title])
+    # display the prediction
+    if df3 is None:
+        st.write(f"Cannot predict by {MODEL_3} model")
+    else:
+        predictions2 = df3.iloc[0, 1:11].tolist()
+        if df1 is None:
+            title = df3.iloc[0, 0]
+            st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
+        for i in range(5):
+            if predictions3[i*2+1]>0:
+                st.markdown(f"<font color='green'>{i+1}. {predictions3[i*2]}</font>: <font color='red'>{predictions3[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
+        

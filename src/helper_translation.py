@@ -21,8 +21,44 @@ def translate_to_english(text, src_lang):
 
 from mtranslate import translate as mtranslate_translate
 
-def translate_array_to_english(texts, src_lang, length_limit=2000):
-    if src_lang != "en":
+# def translate_array_to_english(texts, src_lang, length_limit=2000):
+#     if src_lang != "en":
+#         max_chunk_length = length_limit  # Maximum character limit per translation request
+#         translated_texts = []
+#         current_chunk = []
+
+#         for text in texts:
+#             if len("\n".join(current_chunk)) + len(text) <= max_chunk_length:
+#                 current_chunk.append(text)
+#             else:
+#                 try:
+#                     combined_text = "\n".join(current_chunk)  # Combine current chunk texts
+#                     translated_combined_text = mtranslate_translate(combined_text, 'en', src_lang)
+#                     translated_texts.extend(translated_combined_text.split("\n"))  # Split the translated text by newlines
+#                 except Exception as e:
+#                     # Handle translation error (you can log the error or take other actions as needed)
+#                     print(f"Translation error: {e}")
+#                     translated_texts.extend(current_chunk)  # Use the original texts in case of error
+
+#                 current_chunk = [text]  # Start a new chunk with the current text
+
+#         # Translate the remaining chunk (if any)
+#         if current_chunk:
+#             try:
+#                 combined_text = "\n".join(current_chunk)
+#                 translated_combined_text = mtranslate_translate(combined_text, 'en', src_lang)
+#                 translated_texts.extend(translated_combined_text.split("\n"))
+#             except Exception as e:
+#                 # Handle translation error (you can log the error or take other actions as needed)
+#                 print(f"Translation error: {e}")
+#                 translated_texts.extend(current_chunk)  # Use the original texts in case of error
+
+#         return translated_texts
+#     else:
+#         return texts
+
+def translate_array(texts, src_lang, tar_lang, length_limit=2000):
+    if src_lang != tar_lang:
         max_chunk_length = length_limit  # Maximum character limit per translation request
         translated_texts = []
         current_chunk = []
@@ -33,7 +69,7 @@ def translate_array_to_english(texts, src_lang, length_limit=2000):
             else:
                 try:
                     combined_text = "\n".join(current_chunk)  # Combine current chunk texts
-                    translated_combined_text = mtranslate_translate(combined_text, 'en', src_lang)
+                    translated_combined_text = mtranslate_translate(combined_text, tar_lang, src_lang)
                     translated_texts.extend(translated_combined_text.split("\n"))  # Split the translated text by newlines
                 except Exception as e:
                     # Handle translation error (you can log the error or take other actions as needed)
@@ -46,7 +82,7 @@ def translate_array_to_english(texts, src_lang, length_limit=2000):
         if current_chunk:
             try:
                 combined_text = "\n".join(current_chunk)
-                translated_combined_text = mtranslate_translate(combined_text, 'en', src_lang)
+                translated_combined_text = mtranslate_translate(combined_text, tar_lang, src_lang)
                 translated_texts.extend(translated_combined_text.split("\n"))
             except Exception as e:
                 # Handle translation error (you can log the error or take other actions as needed)
