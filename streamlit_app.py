@@ -17,8 +17,8 @@ There is a `97%` chance that the correct product name is in the top 5 prediction
 """
 
 # load the model
-MODEL_1 =  'sgc_classifier'
-MODEL_2 =  'logistic_regression'
+MODEL_2 =  'sgc_classifier'
+MODEL_1 =  'logistic_regression'
 
 model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
 vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
