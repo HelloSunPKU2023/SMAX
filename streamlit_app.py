@@ -37,7 +37,7 @@ if st.button('Predict'):
         st.stop()
     
     # Model 1
-    st.markdown(f"Predicted by: {model1}")
+    st.markdown(f"Predicted by: {MODEL_1}")
     # predict
     df1 = predict_top5(model = model1, vectorizer = vectorizer1, X_test = [title])
     # display the prediction
@@ -54,7 +54,7 @@ if st.button('Predict'):
                 st.markdown(f"<font color='green'>{i+1}. {predictions1[i*2]}</font>: <font color='red'>{predictions1[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
     
     # Model 2
-    st.markdown(f"Predicted by: {model2}")
+    st.markdown(f"Predicted by: {MODEL_2}")
     # predict
     df2 = predict_top5(model = model2, vectorizer = vectorizer2, X_test = [title])
     # display the prediction
