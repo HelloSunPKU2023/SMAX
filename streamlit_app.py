@@ -81,7 +81,7 @@ if st.button('Predict'):
     if df3 is None:
         st.write(f"Cannot predict by {MODEL_3} model")
     else:
-        predictions2 = df3.iloc[0, 1:11].tolist()
+        predictions3 = df3.iloc[0, 1:11].tolist()
         if df1 is None:
             title = df3.iloc[0, 0]
             st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
