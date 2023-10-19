@@ -27,6 +27,9 @@ vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
 model2 = joblib.load(f'models/model_{MODEL_2}.pkl', 'rb')
 vectorizer2 = joblib.load(f'models/vectorizer_{MODEL_2}.pkl', 'rb')
 
+model3 = joblib.load(f'models/model_{MODEL_3}.pkl', 'rb')
+vectorizer3 = joblib.load(f'models/vectorizer_{MODEL_3}.pkl', 'rb')
+
 # add a text area
 title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
 
