@@ -35,6 +35,8 @@ if st.button('Predict'):
     if title.strip() == '':
         st.write("Please enter a title")
         st.stop()
+    
+    st.markdown(f"Predicted by: {model1}")
     # predict
     df1 = predict_top5(model = model1, vectorizer = vectorizer1, X_test = [title])
     
@@ -46,12 +48,12 @@ if st.button('Predict'):
         title = df1.iloc[0, 0]
         # display the tile in blue and bold font and larger size
         st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
-        
         # # display the predictions in green, one line per prediction
         for i in range(5):
             if predictions1[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions[i*2]}</font>: <font color='red'>{predictions[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
     
+    st.markdown(f"Predicted by: {model2}")
     df2 = predict_top5(model = model2, vectorizer = vectorizer2, X_test = [title])
     if df2 is None:
         st.write("Cannot predict by Logistic Regression model")
