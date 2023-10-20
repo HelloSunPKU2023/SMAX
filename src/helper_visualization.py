@@ -127,7 +127,7 @@ def plot_confusion_matrix(y_true, y_pred, labels=None, title='Confusion matrix',
     labels = labels[idx]
     cm = cm[idx][:, idx]
     
-    fig, ax = plt.subplots(figsize=(12,12))
+    fig, ax = plt.subplots(figsize=(18,18))
     sns.heatmap(cm, annot=True, fmt='.2f', ax=ax, cmap=plt.cm.Blues, cbar=False)
     # sns.heatmap(cm, annot=True, fmt='d', ax=ax, cmap=plt.cm.Blues, cbar=False)
     ax.set(xlabel="Pred", ylabel="True", title=title)

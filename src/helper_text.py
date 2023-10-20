@@ -119,6 +119,7 @@ def remove_uuid(text):
     Removes UUIDs from a given string.
     """
     pattern = re.compile('[\w]{8}-[\w]{4}-[\w]{4}-[\w]{4}-[\w]{12}')
+    # pattern = re.compile(r'[\w]{8}-[\w]{4}-[\w]{4}-[\w]{4}-[\w]{12}')
     return pattern.sub('', text)
 
 def remove_date(text):
