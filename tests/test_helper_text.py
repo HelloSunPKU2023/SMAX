@@ -450,7 +450,7 @@ class TestHelperText(unittest.TestCase):
         self.assertEqual(add_space_between_capitalized_words(text), "This is a Capitalized Word : OFM")
 
     def test_final_clean_up(self):
-        self.assertEqual(final_clean_up("Ext FW Petrel does not accept any value for any new property"), "fw petrel accept value property")
+        self.assertEqual(final_clean_up("Ext FW Petrel does not accept any value for any new property"), "fw petrel accept value new property")
         self.assertEqual(final_clean_up("Mixing Co2 and Ch4"), "mixing co2 ch4")
 
 if __name__ == '__main__':
