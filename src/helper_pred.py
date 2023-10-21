@@ -18,7 +18,7 @@ def predict_top5(model, vectorizer, X_test, pre_processed = False):
         
         # Get the probabilities for each class
         probabilities = model.predict_proba(texts_encoded)
-
+        
         # Define the number of top classes you want
         top_classes = 5
 

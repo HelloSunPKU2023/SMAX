@@ -40,31 +40,20 @@ lemmatizer = WordNetLemmatizer()
 english_stopwords = stopwords.words('english')
 
 additional_stopwords = ['bug', 
-                        'country', 'customer', 'client','crush', 'case',
-                        'error', 'ext', 'external',
+                        'country', 'customer',
+                        'error', 'ext',
                         'field', 'failed', 'fwd',
                         'helpdesk', 'hi', 'help',
                         'id',
                         'message', 'msg',
                         'need',
-                        'project', 'problem', 'please', 'phone',
+                        'please',
                         'question',
-                        'request', 'result', 'run', 'req',
-                        'software', 'support',
+                        'request', 'result', 'req',
+                        'support',
                         'ticket', 'team',
-                        'urgent', 'unable',
-                        'warning'
-                        'log',
-                        'new',
-                        'time',
-                        'map',
-                        'user',
-                        'setting',
-                        'create',
-                        'using',
-                        'report',
-                        'version',
-                        'work'
+                        'urgent',
+                        'using'
                         ]
 english_stopwords.extend(additional_stopwords)
 # print(english_stopwords)
@@ -118,8 +107,7 @@ def remove_uuid(text):
     """
     Removes UUIDs from a given string.
     """
-    pattern = re.compile('[\w]{8}-[\w]{4}-[\w]{4}-[\w]{4}-[\w]{12}')
-    # pattern = re.compile(r'[\w]{8}-[\w]{4}-[\w]{4}-[\w]{4}-[\w]{12}')
+    pattern = re.compile(r'[\w]{8}-[\w]{4}-[\w]{4}-[\w]{4}-[\w]{12}')
     return pattern.sub('', text)
 
 def remove_date(text):
@@ -252,7 +240,6 @@ def final_clean_up(text):
         tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
 
         tokens = [lemmatizer.lemmatize(word) for word in tokens]
-
 
         # Join the tokens back into a string
         text = ' '.join(tokens)
