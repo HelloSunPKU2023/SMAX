@@ -17,9 +17,10 @@ There is a `95%` chance that the correct product name is in the top 5 prediction
 """
 
 # load the model
-MODEL_2 =  'sgc_classifier'
 MODEL_1 =  'logistic_regression'
-MODEL_3 = 'multinomialNB'
+MODEL_2 =  'sgc_classifier'
+MODEL_3 =  'svc_linear'
+MODEL_4 =  'voting'
 
 model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
 vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
@@ -37,7 +38,7 @@ title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
 if st.button('Predict'):
     # check if the user has entered a title
     if title.strip() == '':
-        st.write("Please enter a title")
+        st.write("Please enter a title or a short description of the issue.")
         st.stop()
     
     # Model 1
@@ -73,6 +74,7 @@ if st.button('Predict'):
             if predictions2[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions2[i*2]}</font>: <font color='red'>{predictions2[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
                 
+    
     # Model 3
     st.markdown(f"Predicted by: {MODEL_3} model")
     # predict
@@ -88,4 +90,19 @@ if st.button('Predict'):
         for i in range(5):
             if predictions3[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions3[i*2]}</font>: <font color='red'>{predictions3[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
-        
+    
+    # Model 4
+    st.markdown(f"Predicted by: {MODEL_4} model")
+    # predict
+    df4 = predict_top5(model = model1, vectorizer = vectorizer1, X_test = [title])
+    # display the prediction
+    if df4 is None:
+        st.write(f"Cannot predict by {MODEL_4} model")
+    else:
+        predictions4 = df4.iloc[0, 1:11].tolist()
+        if df1 is None:
+            title = df4.iloc[0, 0]
+            st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
+        for i in range(5):
+            if predictions4[i*2+1]>0:
+                st.markdown(f"<font color='green'>{i+1}. {predictions4[i*2]}</font>: <font color='red'>{predictions4[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
