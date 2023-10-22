@@ -24,6 +24,7 @@ fasttext
 langdetect
 openpyxl
 
+# plotly
 # uvicorn
 # fastapi
 
