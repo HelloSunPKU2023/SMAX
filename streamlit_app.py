@@ -31,6 +31,9 @@ vectorizer2 = joblib.load(f'models/vectorizer_{MODEL_2}.pkl', 'rb')
 model3 = joblib.load(f'models/model_{MODEL_3}.pkl', 'rb')
 vectorizer3 = joblib.load(f'models/vectorizer_{MODEL_3}.pkl', 'rb')
 
+model4 = joblib.load(f'models/model_{MODEL_4}.pkl', 'rb')
+vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
+
 # add a text area
 title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
 
@@ -94,7 +97,7 @@ if st.button('Predict'):
     # Model 4
     st.markdown(f"Predicted by: {MODEL_4} model")
     # predict
-    df4 = predict_top5(model = model1, vectorizer = vectorizer1, X_test = [title])
+    df4 = predict_top5(model = model4, vectorizer = vectorizer4, X_test = [title])
     # display the prediction
     if df4 is None:
         st.write(f"Cannot predict by {MODEL_4} model")
