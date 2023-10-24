@@ -39,21 +39,24 @@ lemmatizer = WordNetLemmatizer()
 # Now you can access the English stopwords
 english_stopwords = stopwords.words('english')
 
-additional_stopwords = ['bug', 
-                        'country', 'customer',
-                        'error', 'ext',
+additional_stopwords = ['add', 'able', 'adding'
+                        'bug', 
+                        'country', 'customer', 'cmz', 
+                        'error', 'errors', 'ext', 'en', 'external',
                         'field', 'failed', 'fwd',
-                        'helpdesk', 'hi', 'help',
-                        'id',
+                        'helpdesk', 'hi', 'help', 'ha',
+                        'issue', 'id', 'internal',
                         'message', 'msg',
-                        'need',
-                        'please',
+                        'need', 'new', 'no',
+                        'please', 'pd',
                         'question',
                         'request', 'result', 'req',
                         'support',
                         'ticket', 'team',
-                        'urgent',
-                        'using'
+                        'urgent', 'unable','use', 'using', 'updated', 'update', 
+                        'slb', 'petronas', 'eni', 'chevron', 'schlumberger', 'cvx',
+                        'sca', 'eag', 'ing', 'inm', 'chg', 'usl',
+                        'mexico', 'china', 'japan', 'korea', 'india', 'indonesia', 'malaysia', 'thailand', 'vietnam', 'singapore', 'australia', 'zealand',  'philippines', 'brunei', 'saudi', 'bp'
                         ]
 english_stopwords.extend(additional_stopwords)
 # print(english_stopwords)
@@ -268,3 +271,14 @@ def extract_abbr(texts):
     abbrs = sorted([(abbr, abbrs.count(abbr)) for abbr in set(abbrs)], key=lambda x: x[0])
     
     return abbrs
+
+# list top n most frequent words in the Title_translated column
+from sklearn.feature_extraction.text import CountVectorizer
+
+def get_top_n_words(corpus, n=100):
+    vec = CountVectorizer(stop_words = 'english').fit(corpus)
+    bag_of_words = vec.transform(corpus)
+    sum_words = bag_of_words.sum(axis=0) 
+    words_freq = [(word, sum_words[0, idx]) for word, idx in vec.vocabulary_.items()]
+    words_freq =sorted(words_freq, key = lambda x: x[1], reverse=True)
+    return words_freq[:n]
