@@ -12,7 +12,7 @@ from src.helper_pred import predict_top5
 # Predict Product by Ticket Title
 
 Put a `Title of a SMAX Ticket` then click the `Predict` button. \n
-There is a `95%` chance that the correct product name is in the top 5 predictions.
+There is a `90%` chance that the correct product name is in the top 3 predictions.
 
 """
 
@@ -21,6 +21,8 @@ MODEL_1 =  'logistic_regression'
 MODEL_2 =  'sgc_classifier'
 MODEL_3 =  'svc_linear'
 MODEL_4 =  'voting'
+
+top_num = 3
 
 model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
 vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
@@ -57,7 +59,7 @@ if st.button('Predict'):
         st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
         st.markdown(f"Predicted by: {MODEL_1} model")
         # # display the predictions in green, one line per prediction
-        for i in range(5):
+        for i in range(top_num):
             if predictions1[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions1[i*2]}</font>: <font color='red'>{predictions1[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
     
@@ -73,7 +75,7 @@ if st.button('Predict'):
         if df1 is None:
             title = df2.iloc[0, 0]
             st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
-        for i in range(5):
+        for i in range(top_num):
             if predictions2[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions2[i*2]}</font>: <font color='red'>{predictions2[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
                 
@@ -90,7 +92,7 @@ if st.button('Predict'):
         if df1 is None:
             title = df3.iloc[0, 0]
             st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
-        for i in range(5):
+        for i in range(top_num):
             if predictions3[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions3[i*2]}</font>: <font color='red'>{predictions3[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
     
@@ -106,6 +108,6 @@ if st.button('Predict'):
         if df1 is None:
             title = df4.iloc[0, 0]
             st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title}</b></font>", unsafe_allow_html=True)
-        for i in range(5):
+        for i in range(top_num):
             if predictions4[i*2+1]>0:
                 st.markdown(f"<font color='green'>{i+1}. {predictions4[i*2]}</font>: <font color='red'>{predictions4[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
