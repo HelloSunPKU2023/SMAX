@@ -9,12 +9,16 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from src.helper_pred import predict_top5
 """
-# Predict Product by Ticket Title [PROTOTYPE FOR CONCEPT DEMO ONLY]
+# Predict Product by Ticket Title
 
 Put a `Title of a SMAX Ticket` then click the `Predict` button. \n
 There is a `90%` chance that the correct product name is in the top 3 predictions.
 
 """
+
+# add a disclaimer
+st.markdown(f"<font color='red' size=4 ><b>Disclaimer:</b></font>", unsafe_allow_html=True)
+st.markdown(f"<font color='red' size=4 >This is a prototype and the prediction may not be accurate.</font>", unsafe_allow_html=True)
 
 # load the model
 MODEL_1 =  'voting'
