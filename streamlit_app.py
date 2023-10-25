@@ -16,10 +16,6 @@ There is a `90%` chance that the correct product name is in the top 3 prediction
 
 """
 
-# add a disclaimer
-st.markdown(f"<font color='red' size=4 ><b>Disclaimer:</b></font>", unsafe_allow_html=True)
-st.markdown(f"<font color='red' size=4 >This is a prototype and the prediction may not be accurate.</font>", unsafe_allow_html=True)
-
 # load the model
 MODEL_1 =  'voting'
 MODEL_4 =  'logistic_regression'
@@ -43,6 +39,8 @@ vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
 # add a text area
 title = st.text_area('Title/Description of a SMAX Ticket (type in the box below):', '')
 
+# add a disclaimer
+st.markdown(f"<font color='red' size=4 ><b>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</b></font>", unsafe_allow_html=True)
 
 # add a button
 if st.button('Predict'):
