@@ -9,7 +9,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 
 from src.helper_pred import predict_top5
 """
-# Predict Product by Ticket Title
+# Predict Product by Ticket Title [PROTOTYPE FOR CONCEPT DEMO ONLY]
 
 Put a `Title of a SMAX Ticket` then click the `Predict` button. \n
 There is a `90%` chance that the correct product name is in the top 3 predictions.
@@ -17,10 +17,10 @@ There is a `90%` chance that the correct product name is in the top 3 prediction
 """
 
 # load the model
-MODEL_1 =  'logistic_regression'
+MODEL_1 =  'voting'
+MODEL_4 =  'logistic_regression'
 MODEL_2 =  'sgc_classifier'
 MODEL_3 =  'svc_linear'
-MODEL_4 =  'voting'
 
 top_num = 3
 
@@ -37,7 +37,8 @@ model4 = joblib.load(f'models/model_{MODEL_4}.pkl', 'rb')
 vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
 
 # add a text area
-title = st.text_area('Title of a SMAX Ticket (type in the box below):', '')
+title = st.text_area('Title/Description of a SMAX Ticket (type in the box below):', '')
+
 
 # add a button
 if st.button('Predict'):
