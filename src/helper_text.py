@@ -36,29 +36,136 @@ from nltk.stem import WordNetLemmatizer
 # Initialize a WordNet Lemmatizer
 lemmatizer = WordNetLemmatizer()
 
+abbreviations = {
+    '1D': 'one dimensional',
+    '2D': 'two dimensional',
+    '3D': 'three dimensional',
+    '4D': 'four dimensional',
+    'ADM': 'active directory manager (ADM)',
+    'API': 'application programming interface (API)',
+    'AMT': 'annular mechanical total (AMT)',
+    'BHA': 'bottom hole assembly (BHA)',
+    'BHP': 'bottom hole pressure (BHP)',
+    'BR': 'drilling',
+    'CCC': 'customer care center',
+    'CMZ': 'commercialization',
+    'CRS': 'coordinate reference system (CRS)',
+    'CAMG': 'cameron',
+    # 'CO2': 'carbon dioxide',
+    # 'CH4': 'methane',
+    'DBTM': 'drill bit total depth measurement (DBTM)',
+    'DB': 'database',
+    'DCA': 'decline curve analysis (DCA)',
+    'DLIS': 'digital log information standard (DLIS)',
+    'DOP': 'drill off test (DOP)',
+    'DDR': 'daily drilling report (DDR)',
+    'EXPL': 'exploration',
+    'ECP': 'electronic control panel (ECP)',
+    'ECL': 'eclipse',
+    # 'EXT': 'external',
+    'FW': 'forward',
+    'FW:': 'forward',
+    'FM': 'forward modeling',
+    'GIS': 'geographic information system (GIS)',
+    'GS_': 'geoservice',
+    'GSS': 'global sourcing solution (GSS)',
+    'GCP': 'google cloud platform (GCP)',
+    'HPE': 'Hewlett Packard Enterprise (HPE)',
+    'HPC': 'high performance computing (HPC)',
+    'IX': 'Intersect',
+    'IWC': 'integrated well construction (IWC)',
+    'IA': 'InterACT',
+    'KPI': 'key performance indicator (KPI)',
+    'LAS': 'log ASCII standard (LAS)',
+    'LGR': 'local grid refinement (LGR)',
+    'ML_': 'mud logging',
+    'ML': 'machine learning',
+    'MWD': 'measurement while drilling (MWD)',
+    'MD': 'measured depth (MD)',
+    'MC': 'mud circulation',
+    'MPD': 'mud pulse density (MPD)',
+    'OLGA': 'oil and gas simulator (OLGA)',
+    'ODRS': 'on demand reservoir simulation (ODRS)',
+    'OFM': 'oil field management (OFM)',
+    'OSDU': 'open subsurface data universe (OSDU)',
+    # 'OML': "",
+    'PTS': 'petrotechnical suite (PTS)',
+    'POC': 'proof of concept',
+    'PAM': 'previliged access manager',
+    'PI': 'production index (PI)',
+    'P4D': 'platform for development',
+    'PROD': 'production tenant',
+    'PVT': 'pressure volume temperature (PVT)',
+    'PSFO': 'ProSource',
+    'QC': 'quality control (QC)',
+    'QI': 'quantitative interpretation (QI)',
+    'RE:': 'regarding',
+    'ROP5': "rate of penetration in 5-minute intervals (ROP5)",
+    'RDP': 'remote desktop protocol (RDP)',
+    'RTDC': 'real time drilling center (RTDC)',
+    'RT': 'real time',
+    'RPT': 'remote project transfer (RPT)',
+    'ROPDSTEP': 'rate of penetration while drilling stepped intervals (ROPDSTEP)',
+    # 'RTDS': 'real time drilling system',
+    'RSDH': 'rig site data hub (RSDH)',
+    'ROP': 'rate of penetration (ROP)',
+    'RTC': 'real time drilling center (RTC)',
+    'SLI': 'service level indicator (SLI)',
+    'SLA': 'service level agreement (SLA)',
+    'SSV': 'semisubmersible vessel (SSV)',
+    'SEGY': 'standard exchange of geophysical data (SEGY)',
+    'SWT': 'seismic well tie (SWT)',
+    'SW': 'shallow water (SW)',
+    'SIM': 'simulation (SIM)',
+    # 'SRD': "",
+    'TL': 'techlog',
+    'TDR': 'time domain reflectometry (TDR)',
+    'TVD': 'true vertical depth (TVD)',
+    'TWT': 'two way time (TWT)',
+    'U&O': 'uncertainty and optimization ',
+    'SQL': 'structured query language (SQL)',
+    'VFP': 'virtual flowmeter prediction (VFP)',
+    'VSP': 'vertical seismic profile (VSP)',
+    'VOL': 'volume',
+    'VM': 'virtual machine (VM)',
+    'VDR': 'virtual data room (VDR)',
+    'WF': 'workflow',
+    'WCS': 'well construction service (WCS)',
+    'WSW': 'well site workstation (WSW)',
+    'WITS': 'wellsite information transfer standard (WITS)',
+    'WITSML': 'wellsite information transfer standard markup language (WITSML)',
+}
+
 # Now you can access the English stopwords
 english_stopwords = stopwords.words('english')
+company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger']
+GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
+Country_name = ['mexico', 'saudi', 'uk', 'algeria']
 
-additional_stopwords = ['add', 'able', 'adding'
+additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'bug', 
-                        'country', 'customer', 'cmz', 
-                        'error', 'errors', 'ext', 'en', 'external',
-                        'field', 'failed', 'fwd',
-                        'helpdesk', 'hi', 'help', 'ha',
-                        'issue', 'id', 'internal',
+                        'country', 'customer', 'cmz', 'commercialization', 'create', 'co', 'collected',
+                        'department', 'dp',
+                        'error', 'errors', 'ext', 'en', 'ext',
+                        'failed', 'fwd',
+                        'helpdesk', 'hi', 'help', 'ha', 'how',
+                        'issue', 'id', 'internal', 'issues',
                         'message', 'msg',
                         'need', 'new', 'no',
-                        'please', 'pd',
+                        'observed',
+                        'please', 'pd', 'ped',
                         'question',
-                        'request', 'result', 'req',
-                        'support',
-                        'ticket', 'team',
+                        'request', 'result', 'req', 'running', 'run', 'rerun', 'required',
+                        'support', 'sh', 'start', 'starting',
+                        'ticket', 'team', 'tr', 
                         'urgent', 'unable','use', 'using', 'updated', 'update', 
-                        'slb', 'petronas', 'eni', 'chevron', 'schlumberger', 'cvx',
-                        'sca', 'eag', 'ing', 'inm', 'chg', 'usl',
-                        'mexico', 'china', 'japan', 'korea', 'india', 'indonesia', 'malaysia', 'thailand', 'vietnam', 'singapore', 'australia', 'zealand',  'philippines', 'brunei', 'saudi', 'bp'
+                        'your', 'i'
                         ]
 english_stopwords.extend(additional_stopwords)
+english_stopwords.extend(company_names)
+english_stopwords.extend(GeoUnits)
+english_stopwords.extend(Country_name)
+
 # print(english_stopwords)
 
 # Initialize a Porter Stemmer
@@ -134,12 +241,13 @@ def remove_whitespace(text):
     pattern = r'^\s+|\s+$|\s+(?=\s)'
     return re.sub(pattern, '', text)
 
+import string
 def remove_punctuation(text):
     """
     Removes punctuation from a given string, excluding "-" and "&".
     """
-    pattern = r'[^\w\s\&|]'
-    return re.sub(pattern, ' ', text)
+    table=str.maketrans('','', string.punctuation)
+    return text.translate(table)
 
 def remove_brackets_content(text):
     """
@@ -186,21 +294,45 @@ def keep_text_after_last_pipe(text):
     else:
         return text.strip()
 
-    
+# Thanks to https://www.kaggle.com/rftexas/text-only-kfold-bert
+def convert_abbrev(word):
+    return abbreviations[word.upper()] if word.upper() in abbreviations.keys() else word
+
+# Thanks to https://www.kaggle.com/rftexas/text-only-kfold-bert
+
+from nltk.tokenize import word_tokenize
+def convert_abbrev_in_text(text):
+    text = text.replace('U&O', ' uncertainty and optimization')
+    tokens = word_tokenize(text)
+    tokens = [convert_abbrev(word) for word in tokens]
+    text = ' '.join(tokens)
+    return text
+
+special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '|']
+
+def remove_special_characters(text, special_characters=special_characters):
+    """
+    Removes special characters from a given string.
+    """
+    for character in special_characters:
+        text = text.replace(character, ' ')
+    return text
 def quick_clean_up(text):
     """
     Performs a quick clean on a given string.
     """
     # text = keep_text_after_last_pipe(text)
     text = add_space_between_cjk_and_non_cjk(text)
-    text = add_space_between_capitalized_words(text)
+    # text = add_space_between_capitalized_words(text)
     # text = remove_brackets_content(text)
-    text = remove_email(text)
     text = remove_uuid(text)
+    text = remove_email(text)
+    
     text = remove_date(text)
     text = remove_time(text)
+    
     text = remove_word_has_alpha_and_digit(text)
-    text = remove_punctuation(text)
+    text = remove_special_characters(text)
     text = remove_underline(text)
     text = remove_digits(text)
     text = remove_whitespace(text)
@@ -223,7 +355,6 @@ def count_words(text):
     return len(words)
 
 
-
 def final_clean_up(text):
         # Continue with preprocessing using the translated title        
 
@@ -234,6 +365,10 @@ def final_clean_up(text):
         # Convert to lowercase
         text = text.lower()
 
+        # text = convert_abbrev_in_text(text)
+        # text = remove_word_has_alpha_and_digit(text)
+        text = remove_punctuation(text)
+        
         tokens = nltk.word_tokenize(text)
 
         #Remove whitespace and empty tokens
@@ -242,7 +377,13 @@ def final_clean_up(text):
         #Remove stopwords   
         tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
 
-        tokens = [lemmatizer.lemmatize(word) for word in tokens]
+        #remove duplicated words
+        tokens = list(set(tokens))
+        
+        #sort the tokens alphabetically
+        tokens = sorted(tokens)
+        
+        # tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
         # Join the tokens back into a string
         text = ' '.join(tokens)

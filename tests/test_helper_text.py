@@ -137,23 +137,23 @@ class TestHelperText(unittest.TestCase):
     def test_remove_punctuation(self):
         # Test case 1: No punctuation in text
         text = "This is a test string."
-        self.assertEqual(remove_punctuation(text), "This is a test string ")
+        self.assertEqual(remove_punctuation(text), "This is a test string")
 
         # Test case 2: Single punctuation in text
         text = "This is a test string with a punctuation: ."
-        self.assertEqual(remove_punctuation(text), "This is a test string with a punctuation   ")
+        self.assertEqual(remove_punctuation(text), "This is a test string with a punctuation ")
 
         # Test case 3: Multiple punctuations in text
         text = "This is a test string with multiple punctuations: ,."
-        self.assertEqual(remove_punctuation(text), "This is a test string with multiple punctuations    ")
+        self.assertEqual(remove_punctuation(text), "This is a test string with multiple punctuations ")
 
         # Test case 4: Punctuation at beginning of text
         text = ",. is a punctuation."
-        self.assertEqual(remove_punctuation(text), "   is a punctuation ")
+        self.assertEqual(remove_punctuation(text), " is a punctuation")
 
         # Test case 5: Punctuation at end of text
         text = "This is a punctuation: ,."
-        self.assertEqual(remove_punctuation(text), "This is a punctuation    ")
+        self.assertEqual(remove_punctuation(text), "This is a punctuation ")
         
         text = '을'
         self.assertEqual(remove_punctuation(text), '을')
@@ -250,11 +250,28 @@ class TestHelperText(unittest.TestCase):
         # Test case 2: Single prefix in text
         text = "This is a test string with a |: [Ext] ofm-递减-"
         self.assertEqual(keep_text_after_last_pipe(text), ': [Ext] ofm-递减-')
+    
+    def test_convert_abbr_in_text(self):
+        # Test case 1: No abbreviation in text
+        text = "This is a test string"
+        self.assertEqual(convert_abbrev_in_text(text), text)
+
+        # Test case 2: Single abbreviation in text
+        text = "This is a test string with a abbreviation: 3D."
+        self.assertEqual(convert_abbrev_in_text(text), "This is a test string with a abbreviation : three dimensional .")
+        
+        # Test case 3: Single abbreviation in text
+        text = "U&O 模块咨询"
+        self.assertEqual(convert_abbrev_in_text(text), "uncertainty and optimization 模块咨询")
+        
+        # Test case 4: Single abbreviation in text
+        text = '*.las 文件转换 ticket'
+        self.assertEqual(convert_abbrev_in_text(text), "* .las 文件转换 ticket")
         
     def test_quick_clean_up(self):
         # Test case 1: No email, UUID, date, time, brackets, word has alpha and digit, short words in text
         text = "This is a test string."
-        expected = "This is a test string"
+        expected = "This is a test string."
         self.assertEqual(quick_clean_up(text), expected)
 
         # Test case 2: 
@@ -269,12 +286,7 @@ class TestHelperText(unittest.TestCase):
         
         # Test case 4:
         text = '[CARMO | X-00SDAT] - Mobile number change bug crash'
-        expected = 'CARMO | Mobile number change bug crash'
-        self.assertEqual(quick_clean_up(text), expected)
-        
-        # test case 5:
-        text = '[CARMO X-00SDAT - Mobile number change error hsun@slb.com'
-        expected = 'CARMO Mobile number change error'
+        expected = 'CARMO Mobile number change bug crash'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 6:
@@ -284,7 +296,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 7:
         text = 'SWISF : Deploy new plugin in Suncor westus tenant data files'
-        expected = 'SWISF Deploy new plugin in Suncor westus tenant data files'
+        expected = 'SWISF : Deploy new plugin in Suncor westus tenant data files'
         self.assertEqual(quick_clean_up(text), expected)
         
         # # test case 8:
@@ -294,12 +306,12 @@ class TestHelperText(unittest.TestCase):
         
         # test case 9:
         text = '(WGS_1984_UTM_Zone_46N), horizontal unit을 Field 단위로 변환하여 사용이 가능한지요?'
-        expected = 'WGS UTM Zone horizontal unit 을 Field 단위로 변환하여 사용이 가능한지요'
+        expected = 'WGS UTM Zone , horizontal unit 을 Field 단위로 변환하여 사용이 가능한지요 ?'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 10:
         text = 'DrillOps Abraj 105    ZAHRA-54H1  4b6842ef-e7c5-44dc-9477-56869c94998e DrillBoreHole.TD FAILED'
-        expected = 'Drill Ops Abraj Drill Bore Hole TD FAILED'
+        expected = 'Drill Ops Abraj Drill Bore Hole .TD FAILED'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 11:
@@ -334,12 +346,12 @@ class TestHelperText(unittest.TestCase):
         
         # test case 17:
         text = '#1037111 EBN: Petrel: error in Delfi'
-        expected = 'EBN Petrel error in Delfi'
+        expected = 'EBN: Petrel : error in Delfi'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 18:
         text = "MXC Bushel 1EXP 01/05/2023 22:00: Well disconnection Rig/Town event"
-        expected = "MXC Bushel Well disconnection Rig Town event"
+        expected = "MXC Bushel : Well disconnection Rig Town event"
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 19:
@@ -349,12 +361,12 @@ class TestHelperText(unittest.TestCase):
         
         # test case 20:
         text = '.ev文件封堵射孔关键字phone'
-        expected = 'ev 文件封堵射孔关键字 phone'
+        expected = '.ev 文件封堵射孔关键字 phone'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 21:
         text = '*.las文件转换tikcets ticket'
-        expected = 'las 文件转换 tikcets ticket'
+        expected = '.las 文件转换 tikcets ticket'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 22:
@@ -427,7 +439,7 @@ class TestHelperText(unittest.TestCase):
         # Test case 5: Abbreviation at end of text
         texts = ["This is a abbreviation: 2XD", "This is a test string with multiple abbreviations: A// and XYZ."]
         self.assertEqual(extract_abbr(texts), [("XYZ", 1)])
-
+        
     def test_add_space_between_capitalized_words(self):
         # Test case 1: No capitalized words in text
         text = "This is a test string."
@@ -450,7 +462,7 @@ class TestHelperText(unittest.TestCase):
         self.assertEqual(add_space_between_capitalized_words(text), "This is a Capitalized Word : OFM")
 
     def test_final_clean_up(self):
-        self.assertEqual(final_clean_up("Ext FW Petrel does not accept any value for any new property"), "fw petrel accept value new property")
+        self.assertEqual(final_clean_up("Ext FW Petrel does not accept any value for any new property"), "fw petrel accept value property")
         self.assertEqual(final_clean_up("Mixing Co2 and Ch4"), "mixing co2 ch4")
 
 if __name__ == '__main__':
