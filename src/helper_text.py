@@ -144,8 +144,8 @@ Country_name = ['mexico', 'saudi', 'uk', 'algeria']
 
 additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'bug', 
-                        'country', 'customer', 'cmz', 'commercialization', 'create', 'co', 'collected',
-                        'department', 'dp',
+                        'country', 'customer', 'cmz', 'commercialization', 'create', 'co', 'collocated',
+                        'department', 'dp', 'discussion',
                         'error', 'errors', 'ext', 'en', 'ext',
                         'failed', 'fwd',
                         'helpdesk', 'hi', 'help', 'ha', 'how',
@@ -153,10 +153,10 @@ additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'message', 'msg',
                         'need', 'new', 'no',
                         'observed',
-                        'please', 'pd', 'ped',
+                        'please', 'pd', 'ped', 'problem',
                         'question',
                         'request', 'result', 'req', 'running', 'run', 'rerun', 'required',
-                        'support', 'sh', 'start', 'starting',
+                        'support', 'sh', 'start', 'starting', 'service',
                         'ticket', 'team', 'tr', 
                         'urgent', 'unable','use', 'using', 'updated', 'update', 
                         'your', 'i'
@@ -377,14 +377,14 @@ def final_clean_up(text):
         #Remove stopwords   
         tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
 
-        #remove duplicated words
-        tokens = list(set(tokens))
-        
-        #sort the tokens alphabetically
-        tokens = sorted(tokens)
-        
-        # tokens = [lemmatizer.lemmatize(word) for word in tokens]
+        tokens = [lemmatizer.lemmatize(word) for word in tokens]
 
+        # #remove duplicated words
+        # tokens = list(set(tokens))
+        
+        # #sort the tokens alphabetically
+        # tokens = sorted(tokens)
+        
         # Join the tokens back into a string
         text = ' '.join(tokens)
         
