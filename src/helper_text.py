@@ -62,7 +62,6 @@ abbreviations = {
     'EXPL': 'exploration',
     'ECP': 'electronic control panel (ECP)',
     'ECL': 'eclipse',
-    # 'EXT': 'external',
     'FW': 'forward',
     'FW:': 'forward',
     'FM': 'forward modeling',
@@ -70,11 +69,12 @@ abbreviations = {
     'GS_': 'geoservice',
     'GSS': 'global sourcing solution (GSS)',
     'GCP': 'google cloud platform (GCP)',
-    'HPE': 'Hewlett Packard Enterprise (HPE)',
+    # 'HPE': 'Hewlett Packard Enterprise (HPE)',
     'HPC': 'high performance computing (HPC)',
     'IX': 'Intersect',
     'IWC': 'integrated well construction (IWC)',
     'IA': 'InterACT',
+    # 'IAM': 'integrated asset management (IAM)',
     'KPI': 'key performance indicator (KPI)',
     'LAS': 'log ASCII standard (LAS)',
     'LGR': 'local grid refinement (LGR)',
@@ -84,16 +84,17 @@ abbreviations = {
     'MD': 'measured depth (MD)',
     'MC': 'mud circulation',
     'MPD': 'mud pulse density (MPD)',
-    'OLGA': 'oil and gas simulator (OLGA)',
-    'ODRS': 'on demand reservoir simulation (ODRS)',
-    'OFM': 'oil field management (OFM)',
+    # 'OLGA': 'oil and gas simulator (OLGA)',
+    # 'ODRS': 'on demand reservoir simulation (ODRS)',
+    # 'OFM': 'oil field management (OFM)',
     'OSDU': 'open subsurface data universe (OSDU)',
     # 'OML': "",
     'PTS': 'petrotechnical suite (PTS)',
+    'PSUITE': 'petrotechnical suite (PTS)',
     'POC': 'proof of concept',
-    'PAM': 'previliged access manager',
+    'PAM': 'privileged access manager (PAM)',
     'PI': 'production index (PI)',
-    'P4D': 'platform for development',
+    # 'P4D': 'platform for development',
     'PROD': 'production tenant',
     'PVT': 'pressure volume temperature (PVT)',
     'PSFO': 'ProSource',
@@ -102,8 +103,8 @@ abbreviations = {
     'RE:': 'regarding',
     'ROP5': "rate of penetration in 5-minute intervals (ROP5)",
     'RDP': 'remote desktop protocol (RDP)',
-    'RTDC': 'real time drilling center (RTDC)',
-    'RT': 'real time',
+    'RTDC': 'realtime drilling center (RTDC)',
+    'RT': 'realtime',
     'RPT': 'remote project transfer (RPT)',
     'ROPDSTEP': 'rate of penetration while drilling stepped intervals (ROPDSTEP)',
     # 'RTDS': 'real time drilling system',
@@ -123,12 +124,12 @@ abbreviations = {
     'TVD': 'true vertical depth (TVD)',
     'TWT': 'two way time (TWT)',
     'U&O': 'uncertainty and optimization ',
-    'SQL': 'structured query language (SQL)',
+    # 'SQL': 'structured query language (SQL)',
     'VFP': 'virtual flowmeter prediction (VFP)',
     'VSP': 'vertical seismic profile (VSP)',
     'VOL': 'volume',
     'VM': 'virtual machine (VM)',
-    'VDR': 'virtual data room (VDR)',
+    # 'VDR': 'virtual data room (VDR)',
     'WF': 'workflow',
     'WCS': 'well construction service (WCS)',
     'WSW': 'well site workstation (WSW)',
@@ -138,9 +139,9 @@ abbreviations = {
 
 # Now you can access the English stopwords
 english_stopwords = stopwords.words('english')
-company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger']
+company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside']
 GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
-Country_name = ['mexico', 'saudi', 'uk', 'algeria']
+Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand']
 
 additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'bug', 
@@ -148,7 +149,7 @@ additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'department', 'dp', 'discussion',
                         'error', 'errors', 'ext', 'en', 'ext',
                         'failed', 'fwd',
-                        'helpdesk', 'hi', 'help', 'ha', 'how',
+                        'helpdesk', 'hi', 'help', 'ha', 'how', 'hello', 'however',
                         'issue', 'id', 'internal', 'issues',
                         'message', 'msg',
                         'need', 'new', 'no',
@@ -378,9 +379,12 @@ def final_clean_up(text):
         tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
 
         tokens = [lemmatizer.lemmatize(word) for word in tokens]
+        
+        #stem the tokens
+        tokens = [stemmer.stem(word) for word in tokens]
 
-        # #remove duplicated words
-        # tokens = list(set(tokens))
+        #remove duplicated words
+        tokens = list(set(tokens))
         
         # #sort the tokens alphabetically
         # tokens = sorted(tokens)
