@@ -63,6 +63,7 @@ if st.button('Predict'):
             if title_cleaned == "":
                 title_cleaned = df.iloc[0, 0]
                 st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title_cleaned}</b></font>", unsafe_allow_html=True)
+            st.markdown(f"Predicted by: {MODEL_NNAMES[i]} model：")
             for i in range(top_num):
                 if prediction[i*2+1]>0:
                     st.markdown(f"<font color='green'>{i+1}. {prediction[i*2]}</font>: <font color='red'>{prediction[i*2+1]*100:.4f}%</font>", unsafe_allow_html=True)
