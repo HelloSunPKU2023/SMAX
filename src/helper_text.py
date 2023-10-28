@@ -356,10 +356,10 @@ def count_words(text):
     # Count the number of words
     return len(words)
 
-
-def final_clean_up(text):
-        # Continue with preprocessing using the translated title        
-
+def extract_keywords(text):
+    """
+    Extracts keywords from a given string.
+    """
     if isinstance(text, str):
         # Remove numbers and special characters
         # text = re.sub(r'[^a-zA-Z\s]', ' ', text)
@@ -389,6 +389,41 @@ def final_clean_up(text):
         
         # #sort the tokens alphabetically
         # tokens = sorted(tokens)
+        
+        # Join the tokens back into a string
+        text = ' '.join(tokens)
+        
+        if count_words(text)<1 or len(text.strip())==0:
+            text = pd.NA
+            
+    return text
+
+def final_clean_up(text):
+        # Continue with preprocessing using the translated title        
+
+    if isinstance(text, str):
+        # Remove numbers and special characters
+        # text = re.sub(r'[^a-zA-Z\s]', ' ', text)
+
+        # Convert to lowercase
+        text = text.lower()
+        
+        text = remove_brackets_content(text)
+
+        text = remove_punctuation(text)
+        
+        tokens = nltk.word_tokenize(text)
+
+        #Remove whitespace and empty tokens
+        tokens = [token.strip() for token in tokens if token.strip()]
+
+        #Remove stopwords   
+        # tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
+
+        # tokens = [lemmatizer.lemmatize(word) for word in tokens]
+        
+        # #stem the tokens
+        # tokens = [stemmer.stem(word) for word in tokens]
         
         # Join the tokens back into a string
         text = ' '.join(tokens)
