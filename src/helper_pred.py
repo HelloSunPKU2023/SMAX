@@ -42,10 +42,9 @@ def predict_top5(model, vectorizer, X_test, pre_processed = False):
 
 def pre_process(text):
     text = quick_clean_up(text)
-    # lang = detect_language_fasttext(text)
-    # if lang != 'en':
+
     text = translate_to_english(text, 'auto')
-    text = convert_abbrev_in_text(text)
+    # text = convert_abbrev_in_text(text)
     # text = final_clean_up(text)
 
     return text
