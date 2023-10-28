@@ -45,7 +45,9 @@ def pre_process(text):
     # lang = detect_language_fasttext(text)
     # if lang != 'en':
     text = translate_to_english(text, 'auto')
-    text = final_clean_up(text)
+    text = convert_abbrev_in_text(text)
+    # text = final_clean_up(text)
+
     return text
 
 from src.helper_pred import predict_top5
