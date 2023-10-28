@@ -308,7 +308,7 @@ def convert_abbrev_in_text(text):
     text = ' '.join(tokens)
     return text
 
-special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '|']
+special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|']
 
 def remove_special_characters(text, special_characters=special_characters):
     """

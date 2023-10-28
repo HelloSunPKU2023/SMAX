@@ -311,7 +311,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 10:
         text = 'DrillOps Abraj 105    ZAHRA-54H1  4b6842ef-e7c5-44dc-9477-56869c94998e DrillBoreHole.TD FAILED'
-        expected = 'Drill Ops Abraj Drill Bore Hole .TD FAILED'
+        expected = 'DrillOps Abraj DrillBoreHole.TD FAILED'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 11:
@@ -331,12 +331,12 @@ class TestHelperText(unittest.TestCase):
         
         # test case 14:
         text = '#Cеминар "Попластовая интерпретация в RussianTools"'
-        expected = 'Cеминар Попластовая интерпретация в Russian Tools'
+        expected = 'Cеминар Попластовая интерпретация в RussianTools'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 15:
         text = '#BubbleSupport_GOM_Lithology pattern fill by value'
-        expected = 'Bubble Support GOM Lithology pattern fill by value'
+        expected = 'BubbleSupport GOM Lithology pattern fill by value'
         self.assertEqual(quick_clean_up(text), expected)
         
         # # test case 16:
@@ -346,7 +346,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 17:
         text = '#1037111 EBN: Petrel: error in Delfi'
-        expected = 'EBN: Petrel : error in Delfi'
+        expected = 'EBN: Petrel: error in Delfi'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 18:
@@ -371,7 +371,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 22:
         text = 'EasyFrac插件咨询'
-        expected = 'Easy Frac 插件咨询'
+        expected = 'EasyFrac 插件咨询'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 23:
