@@ -55,7 +55,7 @@ if st.button('Predict'):
     
     for i in range(len(models)):
         df = predict_top5(model = models[i], vectorizer = vectorizers[i], X_test = [title])
-        if df is not None:
+        if df is None:
             st.write(f"Cannot predict by {MODEL_NNAMES[i]} model")
         else:
             prediction = df.iloc[0, 1:11].tolist()
