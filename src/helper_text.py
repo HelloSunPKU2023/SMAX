@@ -303,7 +303,7 @@ def convert_abbrev(word):
 
 from nltk.tokenize import word_tokenize
 def convert_abbrev_in_text(text):
-    text = text.replace('U&O', ' uncertainty and optimization')
+    text = text.replace('U&O', ' uncertainty and optimization', case=False)
     tokens = word_tokenize(text)
     tokens = [convert_abbrev(word) for word in tokens]
     text = ' '.join(tokens)
