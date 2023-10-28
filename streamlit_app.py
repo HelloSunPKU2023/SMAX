@@ -18,9 +18,9 @@ There is a `90%` chance that the correct product name is in the top 3 prediction
 
 # load the model
 MODEL_1 =  'voting'
-MODEL_4 =  'logistic_regression'
-MODEL_2 =  'sgc_classifier'
-MODEL_3 =  'svc_linear'
+MODEL_2 =  'svc_linear'
+MODEL_3 =  'logistic_regression'
+MODEL_4 =  'sgc_classifier'
 
 top_num = 3
 
