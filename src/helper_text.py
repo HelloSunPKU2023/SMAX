@@ -74,7 +74,7 @@ abbreviations = {
     'IX': 'Intersect',
     'IWC': 'integrated well construction (IWC)',
     'IA': 'InterACT',
-    # 'IAM': 'integrated asset management (IAM)',
+    'IAM': 'integrated asset management (IAM)',
     'KPI': 'key performance indicator (KPI)',
     'LAS': 'log ASCII standard (LAS)',
     'LGR': 'local grid refinement (LGR)',
@@ -84,17 +84,17 @@ abbreviations = {
     'MD': 'measured depth (MD)',
     'MC': 'mud circulation',
     'MPD': 'mud pulse density (MPD)',
-    # 'OLGA': 'oil and gas simulator (OLGA)',
-    # 'ODRS': 'on demand reservoir simulation (ODRS)',
-    # 'OFM': 'oil field management (OFM)',
+    'OLGA': 'oil and gas simulator (OLGA)',
+    'ODRS': 'on demand reservoir simulation (ODRS)',
+    'OFM': 'oil field management (OFM)',
     'OSDU': 'open subsurface data universe (OSDU)',
     # 'OML': "",
-    'PTS': 'petrotechnical suite (PTS)',
-    'PSUITE': 'petrotechnical suite (PTS)',
+    'PTS': 'Petrotechnical Suite (PTS)',
+    'PSUITE': 'Petrotechnical Suite (PTS)',
     'POC': 'proof of concept',
     'PAM': 'privileged access manager (PAM)',
     'PI': 'production index (PI)',
-    # 'P4D': 'platform for development',
+    'P4D': 'platform for development',
     'PROD': 'production tenant',
     'PVT': 'pressure volume temperature (PVT)',
     'PSFO': 'ProSource',
@@ -107,7 +107,7 @@ abbreviations = {
     'RT': 'realtime',
     'RPT': 'remote project transfer (RPT)',
     'ROPDSTEP': 'rate of penetration while drilling stepped intervals (ROPDSTEP)',
-    # 'RTDS': 'real time drilling system',
+    'RTDS': 'real time drilling system',
     'RSDH': 'rig site data hub (RSDH)',
     'ROP': 'rate of penetration (ROP)',
     'RTC': 'real time drilling center (RTC)',
@@ -116,10 +116,10 @@ abbreviations = {
     'SSV': 'semisubmersible vessel (SSV)',
     'SEGY': 'standard exchange of geophysical data (SEGY)',
     'SWT': 'seismic well tie (SWT)',
-    'SW': 'shallow water (SW)',
-    'SIM': 'simulation (SIM)',
+    'SW': 'shallow water',
+    'SIM': 'simulation',
     # 'SRD': "",
-    'TL': 'techlog',
+    'TL': 'Techlog',
     'TDR': 'time domain reflectometry (TDR)',
     'TVD': 'true vertical depth (TVD)',
     'TWT': 'two way time (TWT)',
@@ -129,12 +129,12 @@ abbreviations = {
     'VSP': 'vertical seismic profile (VSP)',
     'VOL': 'volume',
     'VM': 'virtual machine (VM)',
-    # 'VDR': 'virtual data room (VDR)',
+    'VDR': 'virtual data room (VDR)',
     'WF': 'workflow',
     'WCS': 'well construction service (WCS)',
     'WSW': 'well site workstation (WSW)',
     'WITS': 'wellsite information transfer standard (WITS)',
-    'WITSML': 'wellsite information transfer standard markup language (WITSML)',
+    'WITSML': 'wellsite information transfer standard markup language (WITSML)'
 }
 
 # Now you can access the English stopwords
@@ -143,29 +143,38 @@ company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int
 GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
 Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand']
 
-additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
-                        'bug', 
-                        'country', 'customer', 'cmz', 'commercialization', 'create', 'co', 'collocated',
-                        'department', 'dp', 'discussion',
-                        'error', 'errors', 'ext', 'en', 'ext',
-                        'failed', 'fwd',
-                        'helpdesk', 'hi', 'help', 'ha', 'how', 'hello', 'however',
-                        'issue', 'id', 'internal', 'issues',
-                        'message', 'msg',
-                        'need', 'new', 'no',
-                        'observed',
-                        'please', 'pd', 'ped', 'problem',
-                        'question',
-                        'request', 'result', 'req', 'running', 'run', 'rerun', 'required',
-                        'support', 'sh', 'start', 'starting', 'service',
-                        'ticket', 'team', 'tr', 
-                        'urgent', 'unable','use', 'using', 'updated', 'update', 
-                        'your', 'i'
-                        ]
-english_stopwords.extend(additional_stopwords)
+noise_stopwords = ['co', 'cmz',
+                'dp', 
+                'en', 'ext',  
+                'fwd', 
+                'helpdesk', 'hi', 'help', 'ha', 'how', 'hello', 'however',
+                'internal',
+                'message', 'msg',
+                'please', 'pd', 'ped', 
+                'request', 'req', 
+                'bubblesupport', 'sh', 
+                'ticket', 'team', 'tr', 
+                'urgent', 
+                'your', 'i'
+                ]
+english_stopwords.extend(noise_stopwords)
 english_stopwords.extend(company_names)
 english_stopwords.extend(GeoUnits)
 english_stopwords.extend(Country_name)
+
+additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
+                        'bug', 
+                        'commercialization', 'country', 'customer', 'create',  'collocated',
+                        'department', 'discussion',
+                        'error', 'errors', 
+                        'fwd', 'failed',
+                        'need', 'new', 'no',
+                        'problem',
+                        'question',
+                        'result',  'running', 'run', 'rerun', 'required',
+                        'support', 'start', 'starting', 'service',
+                        'unable','use', 'using', 'updated', 'update', 
+                        ]
 
 # print(english_stopwords)
 
@@ -307,7 +316,6 @@ def convert_abbrev_in_text(text):
     tokens = word_tokenize(text)
     tokens = [convert_abbrev(word) for word in tokens]
     text = ' '.join(tokens)
-    text = text.lower()
     return text
 
 special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|']
@@ -377,12 +385,12 @@ def extract_keywords(text):
         tokens = [token.strip() for token in tokens if token.strip()]
 
         #Remove stopwords   
-        tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
+        tokens = [word for word in tokens if word not in additional_stopwords]
 
         tokens = [lemmatizer.lemmatize(word) for word in tokens]
         
         #stem the tokens
-        tokens = [stemmer.stem(word) for word in tokens]
+        # tokens = [stemmer.stem(word) for word in tokens]
 
         #remove duplicated words
         tokens = list(set(tokens))
@@ -398,36 +406,17 @@ def extract_keywords(text):
             
     return text
 
-def final_clean_up(text):
+def enhance_title(text):
         # Continue with preprocessing using the translated title        
 
     if isinstance(text, str):
-        # Remove numbers and special characters
-        # text = re.sub(r'[^a-zA-Z\s]', ' ', text)
-
-        # Convert to lowercase
-        text = text.lower()
-        
-        text = remove_brackets_content(text)
-
         text = remove_punctuation(text)
-        
+        text = convert_abbrev_in_text(text)        
         tokens = nltk.word_tokenize(text)
-
-        #Remove whitespace and empty tokens
+        tokens = [word for word in tokens if word.lower() not in english_stopwords]            
+        text = ' '.join(tokens)
         tokens = [token.strip() for token in tokens if token.strip()]
 
-        #Remove stopwords   
-        # tokens = [word for word in tokens if word not in english_stopwords and len(word)>1]
-
-        # tokens = [lemmatizer.lemmatize(word) for word in tokens]
-        
-        # #stem the tokens
-        # tokens = [stemmer.stem(word) for word in tokens]
-        
-        # Join the tokens back into a string
-        text = ' '.join(tokens)
-        
         if count_words(text)<1 or len(text.strip())==0:
             text = pd.NA
             
