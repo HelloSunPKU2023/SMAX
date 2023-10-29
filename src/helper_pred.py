@@ -1,4 +1,4 @@
-from src.helper_text import quick_clean_up, final_clean_up, convert_abbrev_in_text
+from src.helper_text import quick_clean_up, convert_abbrev_in_text, enhance_title
 from src.helper_translation import translate_to_english
 # from src.helper_language import detect_language_fasttext
 import pandas as pd
@@ -44,8 +44,8 @@ def pre_process(text):
     text = quick_clean_up(text)
 
     text = translate_to_english(text, 'auto')
-    text = convert_abbrev_in_text(text)
-    # text = final_clean_up(text)
+    # text = convert_abbrev_in_text(text)
+    text = enhance_title(text)
 
     return text
 
