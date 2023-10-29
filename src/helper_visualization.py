@@ -76,6 +76,28 @@ def hist_by_labels(df, column_name, top=None, log=False, horizontal=True, left=N
 
     plt.show()
 
+def plot_transformer_training_history(trainer):
+    
+    epoch = int(trainer.state.epoch)
+    
+    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(24, 6))
+    ax1.plot([item.get('loss') for item in trainer.state.log_history][0:epoch*2:2], label='training loss')
+    ax1.plot([item.get('eval_loss') for item in trainer.state.log_history][1:epoch*2+1:2], label='validation loss')
+    ax1.set_xlabel('Epoch')
+    ax1.set_ylabel('Loss')
+    ax1.set_title('Training History')
+    ax1.legend()
+    ax2.plot([item.get('eval_accuracy') for item in trainer.state.log_history][1:epoch*2+1:2], label='validation accuracy')
+    ax2.set_xlabel('Epoch')
+    ax2.set_ylabel('Accuracy')
+    ax2.set_title('Training History')
+    ax2.ylimit = (0, 1)
+    #draw a red dash line at 0.8
+    ax2.axhline(y=0.80, color='red', linestyle='--')
+    ax2.legend()
+    plt.show()    
+
+
 def plot_history(history, title='', axs=None, exp_name=""):
     """
     The function `plot_history` is used to plot the loss and accuracy history of a model during training
