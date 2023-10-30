@@ -173,6 +173,7 @@ additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'fwd', 'failed',
                         'how', 'however',
                         'need', 'new', 'no',
+                        'issue', 'issues',
                         'problem',
                         'question',
                         'result',  'running', 'run', 'rerun', 'required',
@@ -330,7 +331,7 @@ def convert_abbrev_in_text(text):
     text = ' '.join(tokens)
     return text
 
-special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|', ':', '~', '`', '@', '^']
+special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|', ':', '~', '`', '@', '^', '—']
 
 def remove_special_characters(text, special_characters=special_characters):
     """
