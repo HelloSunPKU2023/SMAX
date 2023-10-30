@@ -11,7 +11,7 @@ from src.helper_pred import predict_top5
 """
 # Predict Product by Ticket Title
 
-Put a `Title of a SMAX Ticket` then click the `Predict` button. \n
+Put a `Title/Description of a SMAX Ticket` then click the `Predict` button. \n
 There is a `94%` chance that the correct product name is in the top 3 predictions.
 
 """
@@ -41,7 +41,7 @@ models = [model1, model2, model3, model4]
 vectorizers = [vectorizer1, vectorizer2, vectorizer3, vectorizer4]
 
 # add a text area
-title = st.text_area('Title/Description of a SMAX Ticket (type in the box below):', '')
+title = st.text_area('Type in the box below:', height=50)
 title_cleaned = ""
 # add a disclaimer
 st.markdown(f"<font color='red' size=4 ><b>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</b></font>", unsafe_allow_html=True)
