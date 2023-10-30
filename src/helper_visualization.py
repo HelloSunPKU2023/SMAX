@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def hist_by_labels(df, column_name, fig_width=12, fig_height=8, top=None, log=False, horizontal=True, left=None, right=None):
+def hist_by_labels(df, column_name, fig_width=12, fig_height=4, top=None, log=False, horizontal=True, left=None, right=None):
     """
     The `hist_by_labels` function creates a histogram plot of the distribution of values in a specified
     column of a DataFrame, with options for limiting the number of top values shown, using a log scale,
