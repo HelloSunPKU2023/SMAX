@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def hist_by_labels(df, column_name, top=None, log=False, horizontal=True, left=None, right=None):
+def hist_by_labels(df, column_name, fig_width=12, fig_height=8, top=None, log=False, horizontal=True, left=None, right=None):
     """
     The `hist_by_labels` function creates a histogram plot of the distribution of values in a specified
     column of a DataFrame, with options for limiting the number of top values shown, using a log scale,
@@ -27,7 +27,7 @@ def hist_by_labels(df, column_name, top=None, log=False, horizontal=True, left=N
         value_counts = df[column_name].value_counts().head(top)
 
     # Create a wider or taller histogram plot depending on the orientation
-    figsize = (len(value_counts)//2, 8) if horizontal else (12, len(value_counts)//2)
+    figsize = (len(value_counts)//2, fig_height) if horizontal else (fig_width, len(value_counts)//2)
     plt.figure(figsize=figsize)
     
     

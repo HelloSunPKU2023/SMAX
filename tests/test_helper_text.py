@@ -290,9 +290,9 @@ class TestHelperText(unittest.TestCase):
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 6:
-        # text = '[Completed] PETRONAS DELFI X-00IS5X | Add the file comparison plug-in in Notepad++ in DELFI'
-        # expected = 'Add the file comparison plug in in Notepad in DELFI'
-        # self.assertEqual(quick_clean_up(text), expected)
+        text = '[Completed] PETRONAS DELFI X-00IS5X | Add the 3D file comparison plug-in in Notepad++ in DELFI'
+        expected = 'Completed PETRONAS DELFI Add the 3D file comparison plug in in Notepad in DELFI'
+        self.assertEqual(quick_clean_up(text), expected)
         
         # test case 7:
         text = 'SWISF : Deploy new plugin in Suncor westus tenant data files'
@@ -461,9 +461,9 @@ class TestHelperText(unittest.TestCase):
         text = "This is a CapitalizedWord: OFM"
         self.assertEqual(add_space_between_capitalized_words(text), "This is a Capitalized Word : OFM")
 
-    def test_final_clean_up(self):
-        self.assertEqual(final_clean_up("Ext FW Petrel does not accept any value for any new property"), "fw petrel accept value property")
-        self.assertEqual(final_clean_up("Mixing Co2 and Ch4"), "mixing co2 ch4")
+    def test_enhance_title(self):
+        self.assertEqual(enhance_title("Ext FW Petrel does not accept any value for any new property"), "forward Petrel accept value new property")
+        self.assertEqual(enhance_title("Mixing Co2 and Ch4"), "Mixing Co2 Ch4")
 
 if __name__ == '__main__':
     unittest.main()

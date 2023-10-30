@@ -283,9 +283,9 @@ def remove_word_has_alpha_and_digit(text, exclude_words=exclude_words):
 
 def remove_digits(text):
     """
-    Removes digits from a given string.
+    Removes digits only words from a given string.
     """
-    pattern = r'\d+'
+    pattern = r'\b\d+\b'
     return re.sub(pattern, '', text)
 
 def remove_underline(text):
