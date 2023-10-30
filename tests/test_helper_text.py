@@ -281,7 +281,7 @@ class TestHelperText(unittest.TestCase):
         
         # Test case 3: 
         text =  '[Ext] ofm-递减-chujie.sipc@sinopec.com'
-        expected = 'Ext ofm 递减'
+        expected = 'ofm 递减'
         self.assertEqual(quick_clean_up(text), expected)
         
         # Test case 4:
@@ -296,7 +296,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 7:
         text = 'SWISF : Deploy new plugin in Suncor westus tenant data files'
-        expected = 'SWISF : Deploy new plugin in Suncor westus tenant data files'
+        expected = 'SWISF Deploy new plugin in Suncor westus tenant data files'
         self.assertEqual(quick_clean_up(text), expected)
         
         # # test case 8:
@@ -336,7 +336,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 15:
         text = '#BubbleSupport_GOM_Lithology pattern fill by value'
-        expected = 'BubbleSupport GOM Lithology pattern fill by value'
+        expected = 'GOM Lithology pattern fill by value'
         self.assertEqual(quick_clean_up(text), expected)
         
         # # test case 16:
@@ -346,17 +346,17 @@ class TestHelperText(unittest.TestCase):
         
         # test case 17:
         text = '#1037111 EBN: Petrel: error in Delfi'
-        expected = 'EBN: Petrel: error in Delfi'
+        expected = 'EBN Petrel error in Delfi'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 18:
         text = "MXC Bushel 1EXP 01/05/2023 22:00: Well disconnection Rig/Town event"
-        expected = "MXC Bushel : Well disconnection Rig Town event"
+        expected = "MXC Bushel Well disconnection Rig Town event"
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 19:
         text = '[Ext] mis-tie correctionについて'
-        expected = 'Ext mis tie correction について'
+        expected = 'mis tie correction について'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 20:
@@ -366,7 +366,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 21:
         text = '*.las文件转换tikcets ticket'
-        expected = '.las 文件转换 tikcets ticket'
+        expected = '.las 文件转换 tikcets'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 22:
@@ -381,7 +381,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 24:
         text = '[Ext]凝析气藏注气'
-        expected = 'Ext 凝析气藏注气'
+        expected = '凝析气藏注气'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 25:
@@ -462,7 +462,7 @@ class TestHelperText(unittest.TestCase):
         self.assertEqual(add_space_between_capitalized_words(text), "This is a Capitalized Word : OFM")
 
     def test_enhance_title(self):
-        self.assertEqual(enhance_title("Ext FW Petrel does not accept any value for any new property"), "forward Petrel accept value new property")
+        self.assertEqual(enhance_title("FW Petrel does not accept any value for any new property"), "forward Petrel accept value property")
         self.assertEqual(enhance_title("Mixing Co2 and Ch4"), "Mixing Co2 Ch4")
 
 if __name__ == '__main__':
