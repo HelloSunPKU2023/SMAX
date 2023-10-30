@@ -95,6 +95,7 @@ abbreviations = {
     'PAM': 'privileged access manager (PAM)',
     'PI': 'production index (PI)',
     'P4D': 'platform for development',
+    'PDF': 'production data function (PDF)',
     'PROD': 'production tenant',
     'PVT': 'pressure volume temperature (PVT)',
     'PSFO': 'ProSource',
@@ -163,22 +164,24 @@ def remove_noise_stopwords(text):
 
 company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside']
 GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
-Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand']
+Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand', 'scarabeo']
 
 additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'bug', 
                         'commercialization', 'country', 'customer', 'create',  'collocated',
                         'department', 'discussion',
-                        'error', 'errors', 
-                        'fwd', 'failed',
+                        'error', 'errors', 'etc',
+                        'fwd', 'failed', 'forward',
                         'how', 'however',
+                        'loading', 'load',
                         'need', 'new', 'no',
                         'issue', 'issues',
                         'problem',
-                        'question',
-                        'result',  'running', 'run', 'rerun', 'required',
+                        'question', 'questioning'
+                        'result',  'running', 'run', 'rerun', 'required', 'related',
                         'support', 'start', 'starting', 'service',
                         'unable','use', 'using', 'updated', 'update', 
+                        'working',
                         'your', 'i'
                         ]
 
@@ -306,6 +309,13 @@ def remove_digits(text):
     pattern = r'\b\d+\b'
     return re.sub(pattern, '', text)
 
+def remove_single_character(text):
+    """
+    Removes single character words from a given string.
+    """
+    pattern = r'\b\w\b'
+    return re.sub(pattern, '', text)
+
 def remove_underline(text):
     """
     Removes underline from a given string.
@@ -345,10 +355,15 @@ def remove_special_characters(text, special_characters=special_characters):
     for character in special_characters:
         text = text.replace(character, ' ')
     return text
+
 def quick_clean_up(text):
     """
     Performs a quick clean on a given string.
     """
+    #check if the text has only one word
+    if len(text.split())==1:
+        text = None
+        return text
     # text = keep_text_after_last_pipe(text)
     text = add_space_between_cjk_and_non_cjk(text)
     # text = add_space_between_capitalized_words(text)
@@ -361,7 +376,8 @@ def quick_clean_up(text):
     
     text = remove_word_has_alpha_and_digit(text)
     text = remove_underline(text)
-    
+    text = remove_single_character(text)
+
     text = remove_noise_stopwords(text)
     text = remove_special_characters(text)
     text = remove_noise_stopwords(text)
