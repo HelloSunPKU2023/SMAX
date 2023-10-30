@@ -137,30 +137,33 @@ abbreviations = {
     'WITSML': 'wellsite information transfer standard markup language (WITSML)'
 }
 
-# Now you can access the English stopwords
-english_stopwords = stopwords.words('english')
-company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside']
-GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
-Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand']
-
 noise_stopwords = ['co', 'cmz',
                 'dp', 
                 'en', 'ext',  
                 'fwd', 
-                'helpdesk', 'hi', 'help', 'ha', 'how', 'hello', 'however',
+                're:', 're-',
+                'helpdesk', 'hi', 'help', 'ha', 'hello', 
                 'internal',
                 'message', 'msg',
                 'please', 'pd', 'ped', 
                 'request', 'req', 
                 'bubblesupport', 'sh', 
                 'ticket', 'team', 'tr', 
-                'urgent', 
-                'your', 'i'
+                'urgent'
                 ]
-english_stopwords.extend(noise_stopwords)
-english_stopwords.extend(company_names)
-english_stopwords.extend(GeoUnits)
-english_stopwords.extend(Country_name)
+
+def remove_noise_stopwords(text):
+    """
+    Removes noise stopwords from a given string.
+    """
+    tokens = text.split()
+    tokens = [token for token in tokens if token.lower() not in noise_stopwords]
+    text = ' '.join(tokens)
+    return text
+
+company_names = ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'omv', 'int', 'ecuador', 'ongc', 'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside']
+GeoUnits = ['usl', 'sca', 'slr', 'ksa', 'ing', 'eur', 'eag', 'apg', 'chg']
+Country_name = ['mexico', 'saudi', 'uk', 'algeria', 'china', 'malaysia', 'thailand']
 
 additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'bug', 
@@ -168,13 +171,22 @@ additional_stopwords = ['add', 'able', 'adding', 'available', 'ask',
                         'department', 'discussion',
                         'error', 'errors', 
                         'fwd', 'failed',
+                        'how', 'however',
                         'need', 'new', 'no',
                         'problem',
                         'question',
                         'result',  'running', 'run', 'rerun', 'required',
                         'support', 'start', 'starting', 'service',
                         'unable','use', 'using', 'updated', 'update', 
+                        'your', 'i'
                         ]
+
+# Now you can access the English stopwords
+english_stopwords = stopwords.words('english')
+english_stopwords.extend(additional_stopwords)
+english_stopwords.extend(company_names)
+english_stopwords.extend(GeoUnits)
+english_stopwords.extend(Country_name)
 
 # print(english_stopwords)
 
@@ -266,7 +278,7 @@ def remove_brackets_content(text):
     pattern = r'\[.*?\]|'
     return re.sub(pattern, '', text)
 
-exclude_words = ['1D', '2D', '3D', 'CO2', 'NH3', 'CH4', 'T1', 'T2']
+exclude_words = ['1d', '2d', '3d', 'co2', 'nh3', 'ch4', 't1', 't2']
 
 def remove_word_has_alpha_and_digit(text, exclude_words=exclude_words):
     """
@@ -276,7 +288,7 @@ def remove_word_has_alpha_and_digit(text, exclude_words=exclude_words):
     text = text.replace('_', ' ')
     pattern = r'\b\w*(?:[a-zA-Z]+-?\d+|\d+-?[a-zA-Z]+)\w*\b'
     words = re.findall(pattern, text)
-    words = [word for word in words if word not in exclude_words]
+    words = [word for word in words if word.lower() not in exclude_words]
     for word in words:
         text = text.replace(word, '')
     return text
@@ -318,7 +330,7 @@ def convert_abbrev_in_text(text):
     text = ' '.join(tokens)
     return text
 
-special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|']
+special_characters = ['"', '#', '$', '%', "'", '(', ')', '[', ']', '{', '}','*', '+', '-', '/', '<', '>', '=', '|', ':', '~', '`', '@', '^']
 
 def remove_special_characters(text, special_characters=special_characters):
     """
@@ -342,8 +354,11 @@ def quick_clean_up(text):
     text = remove_time(text)
     
     text = remove_word_has_alpha_and_digit(text)
-    text = remove_special_characters(text)
     text = remove_underline(text)
+    
+    text = remove_noise_stopwords(text)
+    text = remove_special_characters(text)
+    text = remove_noise_stopwords(text)
     text = remove_digits(text)
     text = remove_whitespace(text)
     
@@ -385,7 +400,7 @@ def extract_keywords(text):
         tokens = [token.strip() for token in tokens if token.strip()]
 
         #Remove stopwords   
-        tokens = [word for word in tokens if word not in additional_stopwords]
+        tokens = [word for word in tokens if word.lower() not in additional_stopwords]
 
         tokens = [lemmatizer.lemmatize(word) for word in tokens]
         
