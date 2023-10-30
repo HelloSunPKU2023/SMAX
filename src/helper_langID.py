@@ -50,7 +50,6 @@ def detect_language_fasttext(text, threshold=LANGUAGE_DETECTION_THRESHOLD):
     :return: The function `detect_language_fasttext` returns the detected language of the input text. If
     the language cannot be detected or if there is an error, it returns 'unknown'.
     """
-    # Remove numbers and special characters
     if not is_utf8(text) or len(text)==0 or text is None:
         return 'unknown'
     
