@@ -194,11 +194,15 @@ class TestHelperText(unittest.TestCase):
 
         # Test case 4: Word has alpha and digit at beginning of text
         text = "test123 is a word has alpha and digit."
-        self.assertEqual(remove_word_has_alpha_and_digit(text), " is a word has alpha and digit.")
+        self.assertEqual(remove_word_has_alpha_and_digit(text), "is a word has alpha and digit.")
 
         # Test case 5: Word has alpha and digit at end of text
         text = "This is a word has alpha and digit: test123"
-        self.assertEqual(remove_word_has_alpha_and_digit(text), "This is a word has alpha and digit: ")
+        self.assertEqual(remove_word_has_alpha_and_digit(text), "This is a word has alpha and digit:")
+        
+        # Test case 6: Word has alpha and digit at end of text
+        text = 'WALCOTT-1 and WALCOTT-1ST1'
+        self.assertEqual(remove_word_has_alpha_and_digit(text), 'and')
         
     def test_remove_digits(self):
         # Test case 1: No digits in text

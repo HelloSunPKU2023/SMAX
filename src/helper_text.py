@@ -279,7 +279,7 @@ def remove_brackets_content(text):
     pattern = r'\[.*?\]|'
     return re.sub(pattern, '', text)
 
-exclude_words = ['1d', '2d', '3d', 'co2', 'nh3', 'ch4', 't1', 't2']
+exclude_words = ['1d', '2d', '3d', 'co2', 'nh3', 'ch4', 't1', 't2', 'c2h6', 'c3h8', 'h2o', 'n2', 'h2']
 
 def remove_word_has_alpha_and_digit(text, exclude_words=exclude_words):
     """
@@ -290,9 +290,14 @@ def remove_word_has_alpha_and_digit(text, exclude_words=exclude_words):
     pattern = r'\b\w*(?:[a-zA-Z]+-?\d+|\d+-?[a-zA-Z]+)\w*\b'
     words = re.findall(pattern, text)
     words = [word for word in words if word.lower() not in exclude_words]
+    
+    # sort the words by length descendingly
+    words.sort(key=lambda x: len(x), reverse=True)
+    
+    # remove the words from the text
     for word in words:
         text = text.replace(word, '')
-    return text
+    return text.strip()
 
 def remove_digits(text):
     """
