@@ -12,7 +12,7 @@ from src.helper_pred import predict_top5
 # Predict Product by Ticket Title
 
 Put a `Title/Description of a SMAX Ticket` then click the `Predict` button. \n
-There is a `94%` chance that the correct product name is in the top 3 predictions.
+There is a `>93%` chance that the correct product name is in the top 3 predictions.
 
 """
 
