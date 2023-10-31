@@ -12,27 +12,31 @@ from src.helper_pred import predict_top5
 # Guess what product are you talking about...
 
 Put a `SMAX ticket Title or Description` then click the `Guess` button. \n
-There is a `+93%` chance that the correct product name is in the top 3 predictions.
+`95%` chance of top 3 product match ...
 
 """
 
 # load the model
-MODEL_1 =  'voting'
+MODEL_1 =  'svc_linear'
+# Configuration: Classify top 25 products; Text column: Title_Translated, Title words length: (4, 15);
+# Records/product caped at 6000; Class weight factor: -1; class weight power: 0.5.
+# # Accuracy of top 1 prediction is 0.819.
+# Accuracy of top 3 prediction is 0.952.
+# Accuracy of top 5 prediction is 0.978.
 
-MODEL_2 =  'svc_linear'
-
+MODEL_2 =  'logistic_regression'
 # Configuration: Classify top 25 products; Text column: Title_Translated, Title words length: (4, 15);
 # Records/product caped at 6000; Class weight factor: -1; class weight power: 0.5.
 # Accuracy of top 1 prediction is 0.819.
 # Accuracy of top 3 prediction is 0.951.
 # Accuracy of top 5 prediction is 0.974.
-MODEL_3 =  'logistic_regression'
+
+MODEL_3 =  'sgc_classifier'
 # Configuration: Classify top 25 products; Text column: Title_Translated, Title words length: (4, 15);
 # Records/product caped at 6000; Class weight factor: -1; class weight power: 0.5.
 # Accuracy of top 1 prediction is 0.828.
 # Accuracy of top 3 prediction is 0.947.
 # Accuracy of top 5 prediction is 0.972.
-MODEL_4 =  'sgc_classifier'
 
 top_num = 3
 
@@ -47,12 +51,12 @@ def load_models():
     model3 = joblib.load(f'models/model_{MODEL_3}.pkl', 'rb')
     vectorizer3 = joblib.load(f'models/vectorizer_{MODEL_3}.pkl', 'rb')
 
-    model4 = joblib.load(f'models/model_{MODEL_4}.pkl', 'rb')
-    vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
+    # model4 = joblib.load(f'models/model_{MODEL_4}.pkl', 'rb')
+    # vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
 
-    MODEL_NNAMES = [MODEL_1, MODEL_2, MODEL_3, MODEL_4]
-    models = [model1, model2, model3, model4]
-    vectorizers = [vectorizer1, vectorizer2, vectorizer3, vectorizer4]
+    MODEL_NNAMES = [MODEL_1, MODEL_2, MODEL_3]
+    models = [model1, model2, model3]
+    vectorizers = [vectorizer1, vectorizer2, vectorizer3]
     return MODEL_NNAMES, models, vectorizers
 
 # load the models into the cache
