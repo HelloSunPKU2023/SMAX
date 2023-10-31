@@ -36,7 +36,7 @@ MODEL_4 =  'sgc_classifier'
 
 top_num = 3
 
-@st.cache
+@st.cache_resource
 def load_models():
     model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
     vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
