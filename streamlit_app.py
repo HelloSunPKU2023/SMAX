@@ -89,7 +89,7 @@ if st.button('Guess'):
             
             if title_cleaned == "":
                 title_cleaned = df.iloc[0, 0]
-                st.markdown(f"Title cleaned: <font color='blue' size=5 ><b>{title_cleaned}</b></font>", unsafe_allow_html=True)
+                st.markdown(f"Text cleaned: <font color='blue' size=4 ><b>{title_cleaned}</b></font>", unsafe_allow_html=True)
             st.markdown(f"Predicted by: {MODEL_NNAMES[i]} model")
             for i in range(top_num):
                 if prediction[i*2+1]>0:
