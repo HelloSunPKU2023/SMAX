@@ -11,7 +11,7 @@ from src.helper_pred import predict_top5
 """
 # Guess what product are you talking about...
 
-Put a `SMAX ticket Title or Description` then click the `Guess` button. \n
+Put a `SMAX ticket Title or Description` in the box and click the `Guess` button. \n
 `95%` chance of top 3 product match ...
 
 """
