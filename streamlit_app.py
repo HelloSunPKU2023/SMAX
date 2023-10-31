@@ -37,7 +37,7 @@ MODEL_4 =  'sgc_classifier'
 top_num = 3
 
 @st.cache_resource
-def load_models():
+def load_models(): 
     model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
     vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
 
@@ -55,28 +55,11 @@ def load_models():
     vectorizers = [vectorizer1, vectorizer2, vectorizer3, vectorizer4]
     return MODEL_NNAMES, models, vectorizers
 
-
-# model1 = joblib.load(f'models/model_{MODEL_1}.pkl', 'rb')
-# vectorizer1 = joblib.load(f'models/vectorizer_{MODEL_1}.pkl', 'rb')
-
-# model2 = joblib.load(f'models/model_{MODEL_2}.pkl', 'rb')
-# vectorizer2 = joblib.load(f'models/vectorizer_{MODEL_2}.pkl', 'rb')
-
-# model3 = joblib.load(f'models/model_{MODEL_3}.pkl', 'rb')
-# vectorizer3 = joblib.load(f'models/vectorizer_{MODEL_3}.pkl', 'rb')
-
-# model4 = joblib.load(f'models/model_{MODEL_4}.pkl', 'rb')
-# vectorizer4 = joblib.load(f'models/vectorizer_{MODEL_4}.pkl', 'rb')
-
-# MODEL_NNAMES = [MODEL_1, MODEL_2, MODEL_3, MODEL_4]
-# models = [model1, model2, model3, model4]
-# vectorizers = [vectorizer1, vectorizer2, vectorizer3, vectorizer4]
-
-# load the models
+# load the models into the cache
 MODEL_NNAMES, models, vectorizers = load_models()
 
 # add a text area
-title = st.text_area('Type in the box below:', height=50)
+title = st.text_area('Put SMAX ticket Title or Description in the box below:', height=50)
 title_cleaned = ""
 # add a disclaimer
 st.markdown(f"<font color='red' size=3 ><b>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</b></font>", unsafe_allow_html=True)
