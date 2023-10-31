@@ -39,6 +39,11 @@ MODEL_3 =  'sgc_classifier'
 # Accuracy of top 5 prediction is 0.972.
 
 top_num = 3
+other_products = [
+    'VISAGE', 'eSearch', 'Drillbench', 'Engine Ecosystem, Sim Cluster Mgr.', 
+    'MEPO', 'FDPlan', 'Enterprise Data Solution', 'Flaresim', 'Developer Portal', 
+    'Cameron Supplier Portal', 'Drilling Insights'
+    ]
 
 @st.cache_resource
 def load_models(): 
@@ -89,6 +94,4 @@ if st.button('Guess'):
             for i in range(top_num):
                 if prediction[i*2+1]>0:
                     st.markdown(f"<font color='green'>{i+1}. {prediction[i*2]}</font>: <font color='red'>{prediction[i*2+1]*100:.1f}%</font>", unsafe_allow_html=True)
-
-other_products = ['VISAGE', 'eSearch', 'Drillbench', 'Engine Ecosystem, Sim Cluster Mgr.', 'MEPO', 'FDPlan', 'Enterprise Data Solution', 'Flaresim', 'Developer Portal', 'Cameron Supplier Portal', 'Drilling Insights']
-st.write(f"Other Products (not in top 25): {', '.join(other_products)}") 
+    st.markdown(f"<font color='green' size=3 >Other Products (not in top 25): {', '.join(other_products)}</font>", unsafe_allow_html=True)
