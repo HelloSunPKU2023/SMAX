@@ -1,5 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import seaborn as sns
+from sklearn.metrics import confusion_matrix
 
 def hist_by_labels(df, column_name, fig_width=12, fig_height=4, top=None, log=False, horizontal=True, left=None, right=None):
     """
@@ -97,7 +99,6 @@ def plot_transformer_training_history(trainer):
     ax2.legend()
     plt.show()    
 
-
 def plot_history(history, title='', axs=None, exp_name=""):
     """
     The function `plot_history` is used to plot the loss and accuracy history of a model during training
@@ -131,10 +132,6 @@ def plot_history(history, title='', axs=None, exp_name=""):
     return (ax1, ax2)
 
 # plot confusion matrix
-import seaborn as sns
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-
 def plot_confusion_matrix(y_true, y_pred, labels=None, title='Confusion matrix', cmap=plt.cm.Blues):
     # Compute confusion matrix
     if labels is None:
@@ -156,4 +153,18 @@ def plot_confusion_matrix(y_true, y_pred, labels=None, title='Confusion matrix',
     ax.set_yticklabels(labels, rotation=0)
     ax.set_xticklabels(labels, rotation=90)
     plt.show()
-    
+
+# show the class weight histogram
+def plot_class_weights(class_weight, f=None):
+    plt.figure(figsize=(10, 5))
+    # sort the class weight by value
+    class_weight = dict(sorted(class_weight.items(), key=lambda item: item[1], reverse=False))
+    if f is not None:
+        for key in class_weight.keys():
+            class_weight[key] = f(class_weight[key])
+    plt.bar(class_weight.keys(), class_weight.values())
+    plt.title('Class Weight')
+    plt.xlabel('Class')
+    plt.ylabel('Weight')
+    plt.xticks(rotation=90)
+    plt.show()   
