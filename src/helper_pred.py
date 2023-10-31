@@ -8,37 +8,37 @@ def predict_top5(model, vectorizer, X_test, pre_processed = False):
     if not pre_processed:
         X_test = [pre_process(text) for text in X_test]
     
+    # create empty DataFrame to store the predictions
+    df_predictions = pd.DataFrame(columns=['Text', 'Pred_1', 'proba_1', 'Pred_2', 'proba_2', 'Pred_3', 'proba_3', 'Pred_4', 'proba_4', 'Pred_5', 'proba_5', 'Actual'])
+    df_predictions['Text'] = X_test
+    
+    # Get the probabilities for each class
+    texts_encoded = vectorizer.transform(X_test)
+    # catch error if prediction failed
     try:
-        texts_encoded = vectorizer.transform(X_test)
-
-        # create empty DataFrame to store the predictions
-        df_predictions = pd.DataFrame(columns=['Text', 'Pred_1', 'proba_1', 'Pred_2', 'proba_2', 'Pred_3', 'proba_3', 'Pred_4', 'proba_4', 'Pred_5', 'proba_5', 'Actual'])
-        
-        df_predictions['Text'] = X_test
-        
-        # Get the probabilities for each class
         probabilities = model.predict_proba(texts_encoded)
-        
-        # Define the number of top classes you want
-        top_classes = 5
-
-        # Get the indices of the top k probabilities in the order from highest to lowest
-        top_k_indices = np.argsort(probabilities, axis=1)[:, -top_classes:][:,::-1]
-        
-        # Get the corresponding labels
-        labels = np.array(model.classes_)
-        top_k_labels = [labels[top_indices] for top_indices in top_k_indices]
-        
-        # Print the top k labels with their probabilities 
-        for i, (probs, labs) in enumerate(zip(probabilities, top_k_labels)):
-            for j in range(top_classes):
-                df_predictions.iloc[i, j*2+1] = labs[j]
-                df_predictions.iloc[i, j*2+2] = probs[top_k_indices[i][j]]
-        
-        return df_predictions
-    except:
-        print('Error: Please check the input data')
+    except Exception as e:
+        print(e)
+        print('\033[94mPrediction failed.\033[0m')
         return None
+    
+    # Define the number of top classes you want
+    top_classes = 5
+
+    # Get the indices of the top k probabilities in the order from highest to lowest
+    top_k_indices = np.argsort(probabilities, axis=1)[:, -top_classes:][:,::-1]
+    
+    # Get the corresponding labels
+    labels = np.array(model.classes_)
+    top_k_labels = [labels[top_indices] for top_indices in top_k_indices]
+    
+    # Print the top k labels with their probabilities 
+    for i, (probs, labs) in enumerate(zip(probabilities, top_k_labels)):
+        for j in range(top_classes):
+            df_predictions.iloc[i, j*2+1] = labs[j]
+            df_predictions.iloc[i, j*2+2] = probs[top_k_indices[i][j]]
+    
+    return df_predictions
 
 def pre_process(text):
     text = quick_clean_up(text)
@@ -53,7 +53,8 @@ from src.helper_pred import predict_top5
 
 def top5_accuracy_report(model, vectorizer, X_test, y_test, pre_processed=True):
     df_pred_top5 = predict_top5(model, vectorizer, X_test, pre_processed=pre_processed)
-
+    if df_pred_top5 is None:
+        return None
     df_pred_top5['Actual'] = y_test
 
     # check if Actual is in the top 1
