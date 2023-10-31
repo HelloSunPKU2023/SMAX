@@ -42,7 +42,7 @@ async def predict(title: str):
     return response
 
 def get_predictions(title):
-    df = predict_top5(model = app.state.model, vectorizer = app.state.vectorizer, X_test = [title])
+    df = predict_top5(model = app.state.model, vectorizer = app.state.vectorizer, X_test = [title], pre_processed = False)
     if df is None:
         return "None", "Cannot predict"
     else:
