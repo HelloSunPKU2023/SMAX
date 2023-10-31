@@ -26,7 +26,7 @@ class OtherProductsCombiner(BaseEstimator, TransformerMixin):
     def transform(self, X):
         df = X.copy()
         mask = ~df[self.target_col].isin(self.top_products)
-        df.loc[mask, self.target_col]=f'Others Products (not in top {len(self.top_products)})'
+        df.loc[mask, self.target_col]=f'Other Products (not in top {len(self.top_products)})'
         return df
 
 # create a scikit-learn transformer to cap the number of samples for each product
