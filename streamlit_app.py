@@ -59,7 +59,7 @@ def load_models():
 MODEL_NNAMES, models, vectorizers = load_models()
 
 # add a text area
-title = st.text_area('Put SMAX ticket Title or Description in the box below:', height=50)
+title = st.text_area('SMAX ticket Title or Description:', height=50)
 title_cleaned = ""
 # add a disclaimer
 st.markdown(f"<font color='red' size=3 ><b>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</b></font>", unsafe_allow_html=True)
