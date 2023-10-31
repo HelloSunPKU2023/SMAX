@@ -72,7 +72,8 @@ def load_models():
 # models = [model1, model2, model3, model4]
 # vectorizers = [vectorizer1, vectorizer2, vectorizer3, vectorizer4]
 
-load_models()
+# load the models
+MODEL_NNAMES, models, vectorizers = load_models()
 
 # add a text area
 title = st.text_area('Type in the box below:', height=50)
