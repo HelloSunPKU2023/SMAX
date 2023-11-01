@@ -17,7 +17,7 @@ Put a `SMAX ticket Title or Description` in the box and click the `Guess` button
 """
 
 # load the model
-MODEL_3 =  'svc_linear'
+MODEL_1 =  'svc_linear'
 # Configuration: Classify top 25 products; Text column: Title_Translated, Title words length: (4, 15);
 # Records/product caped at 6000; Class weight factor: -1; class weight power: 0.5.
 # Accuracy of top 1 prediction is 0.829.
@@ -31,7 +31,7 @@ MODEL_2 =  'logistic_regression'
 # Accuracy of top 3 prediction is 0.954.
 # Accuracy of top 5 prediction is 0.976.
 
-MODEL_1 =  'sgc_classifier'
+MODEL_3 =  'sgc_classifier'
 # Configuration: Classify top 25 products; Text column: Title_Translated, Title words length: (4, 15);
 # Records/product caped at 6000; Class weight factor: -1; class weight power: 0.5.
 # Accuracy of top 1 prediction is 0.836.
