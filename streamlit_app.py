@@ -94,4 +94,4 @@ if st.button('Guess'):
             for i in range(top_num):
                 if prediction[i*2+1]>0:
                     st.markdown(f"<font color='green'>{i+1}. {prediction[i*2]}</font>: {prediction[i*2+1]*100:.1f}%", unsafe_allow_html=True)
-    st.markdown(f"NOTE:\n<font color='green' size=3 >Other Products (not in top 25)</font> includes: {', '.join(other_products)}", unsafe_allow_html=True)
+    st.markdown(f"*NOTE:\n <font color='green' size=3 >Other Products (not in top 25)</font> includes: {', '.join(other_products)}", unsafe_allow_html=True)
