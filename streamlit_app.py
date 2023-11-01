@@ -71,7 +71,7 @@ MODEL_NNAMES, models, vectorizers = load_models()
 title = st.text_area('SMAX ticket Title or Description:', height=50)
 title_cleaned = ""
 # add a disclaimer
-st.markdown(f"<font color='red' size=3 ><b>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</b></font>", unsafe_allow_html=True)
+st.markdown(f"<font color='red' size=3>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</font>", unsafe_allow_html=True)
 
 # add a button
 if st.button('Guess'):
@@ -94,4 +94,4 @@ if st.button('Guess'):
             for i in range(top_num):
                 if prediction[i*2+1]>0:
                     st.markdown(f"<font color='green'>{i+1}. {prediction[i*2]}</font>: {prediction[i*2+1]*100:.1f}%", unsafe_allow_html=True)
-    st.markdown(f"*NOTE:\n <font color='green' size=3 >Other Products (not in top 25)</font> includes: {', '.join(other_products)}", unsafe_allow_html=True)
+    st.markdown(f"<font color='red' size=3 >*</font>NOTE: <font color='green' size=3 >Other Products (not in top 25)</font> includes {', '.join(other_products)}", unsafe_allow_html=True)
