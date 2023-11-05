@@ -70,6 +70,9 @@ MODEL_NNAMES, models, vectorizers = load_models()
 # add a text area
 title = st.text_area('SMAX ticket Title or Description:', height=50)
 title_cleaned = ""
+other_products_label = 'Other Products (not in top 25)'
+
+
 # add a disclaimer
 st.markdown(f"<font color='red' size=3>Disclaimer: For demonstration purposes only; predictions may be inaccurate.</font>", unsafe_allow_html=True)
 
@@ -81,6 +84,7 @@ if st.button('Guess'):
         st.stop()
     
     for i in range(len(models)):
+        other_products_predicted = False
         df = predict_top5(model = models[i], vectorizer = vectorizers[i], X_test = [title])
         if df is None:
             st.write(f"Cannot predict by {MODEL_NNAMES[i]} model")
@@ -93,5 +97,8 @@ if st.button('Guess'):
             st.markdown(f"Predicted by: {MODEL_NNAMES[i]} model")
             for i in range(top_num):
                 if prediction[i*2+1]>0:
-                    st.markdown(f"<font color='green'>{i+1}. {prediction[i*2]}</font>: {prediction[i*2+1]*100:.1f}%", unsafe_allow_html=True)
-    st.markdown(f"<font color='red' size=3 >*</font><font color='green' size=3 >Other Products (not in top 25)</font> includes {', '.join(other_products)}", unsafe_allow_html=True)
+                    result_text = f"<font color='green'>{i+1}. {prediction[i*2]}</font>: {prediction[i*2+1]*100:.1f}%"
+                    other_products_predicted = result_text.find(other_products_label) > 0
+                    st.markdown(result_text, unsafe_allow_html=True)
+    if other_products_predicted:
+        st.markdown(f"<font color='red' size=3 >*</font><font color='green' size=3 >{other_products_label}</font> includes {', '.join(other_products)}", unsafe_allow_html=True)
