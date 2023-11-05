@@ -98,7 +98,6 @@ if st.button('Guess'):
                 if prediction[i*2+1]>0:
                     result_text = f"<font color='green'>{i+1}. {prediction[i*2]}</font>: {prediction[i*2+1]*100:.1f}%"
                     st.markdown(result_text, unsafe_allow_html=True)
-                    if not other_products_predicted:
-                        other_products_predicted = result_text.find(other_products_label) > 0
+                    other_products_predicted = other_products_predicted or prediction[i*2].find(other_products_label) > 0
     if other_products_predicted:
         st.markdown(f"<font color='red' size=3 >*</font><font color='green' size=3 >{other_products_label}</font> includes {', '.join(other_products)}", unsafe_allow_html=True)
