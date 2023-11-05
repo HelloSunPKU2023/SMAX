@@ -70,7 +70,7 @@ MODEL_NNAMES, models, vectorizers = load_models()
 # add a text area
 title = st.text_area('SMAX ticket Title or Description:', height=50)
 title_cleaned = ""
-other_products_label = 'Other Products (not in top 25)'
+other_products_label = 'Other Products (not in Top 25)'
 
 
 # add a disclaimer
