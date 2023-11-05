@@ -82,9 +82,8 @@ if st.button('Guess'):
     if title.strip() == '':
         st.write("Please enter a title or a short description of the issue.")
         st.stop()
-    
+    other_products_predicted = False
     for i in range(len(models)):
-        other_products_predicted = False
         df = predict_top5(model = models[i], vectorizer = vectorizers[i], X_test = [title])
         if df is None:
             st.write(f"Cannot predict by {MODEL_NNAMES[i]} model")
