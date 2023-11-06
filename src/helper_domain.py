@@ -16,7 +16,7 @@ Entities= {
                 'Data Delivery Services', 'Data Ingestion', 'Data Integration Framework', 'Data Integrator', 'Data Migration', 'Data Science', 'Dataiku DSS', 
                 'Delfi Help', 'Delfi Opportunity Assessor', 'Delfi Portal', 'Delfi Production Chemical', 'Developer Portal', 'Delfi',
                 'DrillOps', 'DrillPlan', 'Drillbench', 'Drilling Insights', 'Drilling Office', 'Drilling Interpretation',
-                'ECLIPSE', 'EXP_PS', 'Edge', 'Engine Ecosystem', 
+                'ECLIPSE', 'EXP_PS', 'Edge', 'Engine Ecosystem', 'EESy',
                 'Enterprise Data Management Agent', 'Enterprise Data Solution', 'Enterprise Data Workspace', 'Enterprise Developer Portal', 'Enterprise Portal', 
                 'ExplorePlan', 'eSearch',
                 'FDPlan', 'FORGAS', 'Facility Planner', 'Flaresim', 'FluidModeler', 
@@ -26,8 +26,8 @@ Entities= {
                 'LiveQuest', 
                 'MEPO', 'MERAK', 'Malcom', 
                 'Nasuni', 'NetApp ANF', 
-                'OFM', 'OLGA', 'OLGA Online', 'OMNI3D', 'Ocean Framework', 'Ocean Plug-ins','Ocean Store','Omega', 'On Demand Reservoir Simulation', 'Osprey', 
-                'PIPEFLO', 'PIPESIM', 'PIPESYS', 'PerformView', 'Petrel', 'Petrel Exploration Geology', 'PetrelRE', 'PetroMod', 
+                'OFM', 'OLGA', 'OLGA Online', 'OMNI3D', 'Ocean Framework', 'Ocean Plug-ins','Ocean Store','Omega', 'ODRS', 'On Demand Reservoir Simulation', 'Osprey', 
+                'PIPEFLO', 'PIPESIM', 'PIPESYS', 'PerformView', 'Petrel', 'Petrel Exploration Geology', 'PetrelRE', 'PetroMod', 'PTS',
                 'Petrotechnical Suite', 'ProSource', 'ProcessOps', 'ProdOps', 'Production Data Foundation', 'Provisioning & Decommissioning', 
                 'RP Planner', 'RTDS', 'Rapid Screening', 'Reservoir Analytics', 'RigHour', 
                 'Seabed', 'Secure Data Exchange', 'Simulation Cluster Manager', 'Studio', 'Symmetry', 'Spotfire', 
@@ -74,6 +74,18 @@ def set_custom_entities(doc):
         # print(doc[start:end], match_id)
         span = Span(doc, start, end, label=match_id)
         spans.append(span)
+    
+    # remove entities from doc.ents if the ent has the same start as a span in spans
+
+    for ent in doc.ents:
+        overlaps = False
+        for span in spans:
+            if (ent.start >= span.start and ent.start < span.end) or (ent.end > span.start and ent.end <= span.end) or (span.start >= ent.start and span.start < ent.end) or (span.end > ent.start and span.end <= ent.end):
+                overlaps = True
+                break    
+        if not overlaps:
+            spans.append(ent)
+    # print(spans)
     doc.ents = spans
     return doc
 
