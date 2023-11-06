@@ -360,14 +360,8 @@ def quick_clean_up(text):
     """
     Performs a quick clean on a given string.
     """
-    #check if the text has only one word
-    if len(text.split())==1:
-        text = None
-        return text
     # text = keep_text_after_last_pipe(text)
     text = add_space_between_cjk_and_non_cjk(text)
-    # text = add_space_between_capitalized_words(text)
-    # text = remove_brackets_content(text)
     text = remove_uuid(text)
     text = remove_email(text)
     
@@ -376,8 +370,7 @@ def quick_clean_up(text):
     
     text = remove_word_has_alpha_and_digit(text)
     text = remove_underline(text)
-    text = remove_single_character(text)
-
+    # text = remove_single_character(text)
     text = remove_noise_stopwords(text)
     text = remove_special_characters(text)
     text = remove_noise_stopwords(text)

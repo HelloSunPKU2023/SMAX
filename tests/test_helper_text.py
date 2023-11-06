@@ -466,7 +466,7 @@ class TestHelperText(unittest.TestCase):
         self.assertEqual(add_space_between_capitalized_words(text), "This is a Capitalized Word : OFM")
 
     def test_enhance_title(self):
-        self.assertEqual(enhance_title("FW Petrel does not accept any value for any new property"), "forward Petrel accept value property")
+        self.assertEqual(enhance_title("FW Petrel does not accept any value for any new property"), "Petrel accept value property")
         self.assertEqual(enhance_title("Mixing Co2 and Ch4"), "Mixing Co2 Ch4")
 
 if __name__ == '__main__':
