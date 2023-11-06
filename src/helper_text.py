@@ -376,6 +376,7 @@ def quick_clean_up(text):
     text = remove_noise_stopwords(text)
     text = remove_digits(text)
     text = remove_whitespace(text)
+    text = remove_repeated_word(text)
     
     text = text.strip()
     if text == "":
@@ -393,6 +394,11 @@ def count_words(text):
     words = re.findall(word_pattern, text)
     # Count the number of words
     return len(words)
+
+# function to remove word that repeats the previous word (ignore case), such as "the the" -> "the"
+def remove_repeated_word(text):
+    text = re.sub(r'\b(\w+)( \1\b)+', r'\1', text, flags=re.IGNORECASE)
+    return text
 
 def extract_keywords(text):
     """

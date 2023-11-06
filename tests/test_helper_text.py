@@ -295,7 +295,7 @@ class TestHelperText(unittest.TestCase):
         
         # test case 6:
         text = '[Completed] PETRONAS DELFI X-00IS5X | Add the 3D file comparison plug-in in Notepad++ in DELFI'
-        expected = 'Completed PETRONAS DELFI Add the 3D file comparison plug in in Notepad in DELFI'
+        expected = 'Completed PETRONAS DELFI Add the 3D file comparison plug in Notepad in DELFI'
         self.assertEqual(quick_clean_up(text), expected)
         
         # test case 7:
