@@ -6,9 +6,10 @@ from spacy.language import Language
 
 Entities= {
     'ORG': ['eni', 'petronas', 'tpao', 'slb', 'cvx', 'equinor', 'Ecopetrol', 'omv', 'int', 'ongc', 
-                'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside'],
+                'bp', 'bsp', 'spic', 'chevron', "mpcl", 'schlumberger', 'santos', 'woodside',
+                'dragon oil'],
     
-    'GPE': ['USL', 'SCA', 'SLR', 'KSA', 'ING', 'EUR', 'EAG', 'APG', 'CHG'],
+    'LOC': ['USL', 'SCA', 'SLR', 'KSA', 'ING', 'EUR', 'EAG', 'APG', 'CHG'],
     
     'PRODUCT': ['Agile Reservoir Modeling', 'Avocet', 'Agora',
                 'Cameron Supplier Document Management', 'Cameron Supplier Portal', 'Cameron Surface Surveillance', 'ConnectedProduction', 
